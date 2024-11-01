@@ -45,6 +45,7 @@ lazy.setup({
 		require("plugins.luasnip"),
 		require("plugins.markdown"),
 		require("plugins.mason"),
+		require("plugins.navic"),
 		require("plugins.scrollbar"),
 		require("plugins.surround"),
 		require("plugins.telescope"),

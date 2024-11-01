@@ -2,7 +2,7 @@ return {
 	"nvim-lualine/lualine.nvim",
 	event = "VeryLazy",
 	dependencies = { 'nvim-tree/nvim-web-devicons' },
-	init = function ()
+	init = function()
 		-- disable until lualine loads
 		vim.opt.laststatus = 0
 	end,
@@ -14,7 +14,7 @@ return {
 				theme = 'auto',
 				section_separators = { left = '', right = '' },
 				component_separators = { left = '', right = '' },
-				disabled_filetypes = { 'alpha'}
+				disabled_filetypes = { 'alpha' }
 			},
 			sections = {
 				lualine_a = { 'mode' },
@@ -22,10 +22,12 @@ return {
 				lualine_c = { {
 					'filename',
 					file_status = true, -- displays file status (readonly status, modified status)
-					path = 0 -- 0 = just filename, 1 = relative path, 2 = absolute path
+					path = 0       -- 0 = just filename, 1 = relative path, 2 = absolute path
 				} },
 				lualine_x = {
-					{ 'diagnostics', sources = { "nvim_diagnostic" },
+					{
+						'diagnostics',
+						sources = { "nvim_diagnostic" },
 						symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' }
 					},
 					'encoding',
@@ -59,7 +61,6 @@ return {
 			tabline = {},
 			extensions = { 'fugitive' }
 		}
-		--
 		return config
 	end,
 }

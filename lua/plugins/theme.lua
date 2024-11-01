@@ -27,8 +27,9 @@ if hostname == 'arch' then
 				inverse = true, -- invert background for search, diffs, statuslines and errors
 				contrast = "", -- can be "hard", "soft" or empty string
 				palette_overrides = {
-					dark0 = "#1D2022",
 					dark1 = "#2C2C2C",
+					dark0 = "#1D2022",
+
 					bright_green = "#98971A",
 					bright_yellow = "#D79921",
 				},
