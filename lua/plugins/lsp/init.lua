@@ -93,6 +93,7 @@ return {
 			tflint = {},
 			ts_ls = require("plugins.lsp.servers.ts_ls")(on_attach),
 			yamlls = {},
+			omnisharp = require("plugins.lsp.servers.omnisharp")(on_attach),
 		}
 
 		local default_lsp_config = {

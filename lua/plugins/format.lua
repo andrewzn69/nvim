@@ -15,7 +15,8 @@ return {
 				cmake = formatters.shell({ cmd = { "cmake-format", "-i" } }),           -- idk
 				cpp = formatters.shell({ cmd = { "clang-format", "--style=file", "-i" } }), -- idk
 				css = formatters.lsp,
-				go = formatters.lsp,                                                    --idk
+				cs = formatters.lsp,
+				go = formatters.lsp, --idk
 				html = formatters.lsp,
 				java = formatters.shell({
 					cmd = { "astyle", "-A2", "-s2", "-c", "-J", "-n", "-q", "-z2", "-xC80" },
