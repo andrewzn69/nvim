@@ -16,6 +16,7 @@ return {
 				cpp = formatters.shell({ cmd = { "clang-format", "--style=file", "-i" } }), -- idk
 				css = formatters.lsp,
 				cs = formatters.lsp,
+				ex = formatters.lsp,
 				go = formatters.lsp, --idk
 				html = formatters.lsp,
 				java = formatters.shell({

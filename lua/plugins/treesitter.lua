@@ -15,6 +15,7 @@ return {
 				"css",
 				"c_sharp",
 				"dockerfile",
+				"elixir",
 				"go",
 				"graphql",
 				"hcl",
