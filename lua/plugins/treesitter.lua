@@ -20,6 +20,7 @@ return {
 				"graphql",
 				"hcl",
 				"html",
+				"hyprlang",
 				"javascript",
 				"json",
 				"lua",
@@ -119,6 +120,10 @@ return {
 				},
 			},
 
+		})
+
+		vim.filetype.add({
+			pattern = { [".*/hypr/.*%.conf"] = "hyprlang" },
 		})
 
 		local r = require("utils.remaps")
