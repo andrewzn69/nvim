@@ -53,6 +53,7 @@ lazy.setup({
 		require("plugins.trouble"),
 		require("plugins.ts-autotag"),
 		require("plugins.typst"),
+		require("plugins.wakatime"),
 		require("plugins.which-key"),
 		require("plugins.yuck"),
 	},
