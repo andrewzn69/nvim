@@ -77,8 +77,9 @@ return {
 		end
 
 		local servers = {
+			astro = require("plugins.lsp.servers.astro")(on_attach),
 			bashls = require("plugins.lsp.servers.bashls")(on_attach),
-			biome = {},
+			biome = require("plugins.lsp.servers.biome")(on_attach),
 			cssls = require("plugins.lsp.servers.cssls")(on_attach),
 			dockerls = {},
 			elixirls = {},
