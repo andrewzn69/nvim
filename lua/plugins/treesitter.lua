@@ -11,6 +11,7 @@ return {
 		---@diagnostic disable-next-line
 		treesitter.setup({
 			ensure_installed = {
+				"astro",
 				"bash",
 				"css",
 				"c_sharp",
