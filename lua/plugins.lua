@@ -26,7 +26,6 @@ end
 lazy.setup({
 	spec = {
 		require("plugins.alpha"),
-		require("plugins.astro"),
 		require("plugins.autopairs"),
 		require("plugins.cmp"),
 		require("plugins.colorizer"),
