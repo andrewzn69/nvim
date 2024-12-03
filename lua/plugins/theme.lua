@@ -43,7 +43,7 @@ if hostname == 'arch' then
 			vim.cmd("colorscheme gruvbox")
 		end,
 	}
-elseif hostname == 'archnb' then
+elseif hostname == 'archnb' or 'fedoranb' then
 	return {
 		{
 			"nyoom-engineering/oxocarbon.nvim",
