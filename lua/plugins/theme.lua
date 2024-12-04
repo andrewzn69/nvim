@@ -45,12 +45,22 @@ if hostname == 'arch' then
 	}
 elseif hostname == 'archnb' or 'fedoranb' then
 	return {
-		{
-			"nyoom-engineering/oxocarbon.nvim",
-			lazy = false,
-			config = function()
-				vim.cmd("colorscheme oxocarbon")
-			end
-		},
+		"nyoom-engineering/oxocarbon.nvim",
+		lazy = false,
+		config = function()
+			vim.cmd("colorscheme oxocarbon")
+		end
+	}
+elseif hostname == 'fedoranb' then
+	return {
+		"shaunsingh/nord.nvim",
+		lazy = false,
+		config = function()
+			vim.cmd("colorscheme nord")
+		end
+	}
+else
+	return {
+		vim.cmd("colorscheme default")
 	}
 end
