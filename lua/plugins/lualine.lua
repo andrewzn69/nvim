@@ -8,12 +8,15 @@ return {
 	end,
 	opts = function()
 		-- config
+		local function current_time()
+			return os.date(' %H:%M')
+		end
 		local config = {
 			options = {
 				icons_enabled = true,
 				theme = 'auto',
 				section_separators = { left = '', right = '' },
-				component_separators = { left = '', right = '' },
+				component_separators = { left = '', right = '' },
 				disabled_filetypes = { 'alpha' }
 			},
 			sections = {
@@ -30,11 +33,11 @@ return {
 						sources = { "nvim_diagnostic" },
 						symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' }
 					},
-					'encoding',
+					'',
 					'filetype'
 				},
-				lualine_y = { 'progress' },
-				lualine_z = { 'location' }
+				lualine_y = { 'progress', 'location' },
+				lualine_z = { current_time }
 			},
 			inactive_sections = {
 				lualine_a = {},
