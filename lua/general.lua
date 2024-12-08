@@ -97,3 +97,15 @@ vim.opt.formatoptions:append { 'r' }
 -- undercurl
 vim.cmd([[let &t_Cs = "\e[4:3m"]])
 vim.cmd([[let &t_Ce = "\e[4:0m"]])
+
+-- automatically change working directory to the project root
+vim.api.nvim_create_autocmd("BufEnter", {
+	pattern = "*",
+	callback = function()
+		local cwd = vim.fn.getcwd()
+		local git_root = vim.fn.finddir(".git", cwd .. ";")
+		if git_root ~= "" then
+			vim.cmd("cd " .. vim.fn.fnamemodify(git_root, ":h"))
+		end
+	end,
+})
