@@ -4,7 +4,7 @@ return {
 	dependencies = { 'nvim-tree/nvim-web-devicons' },
 	init = function()
 		-- disable until lualine loads
-		vim.opt.laststatus = 0
+		vim.opt.laststatus = 3
 	end,
 	opts = function()
 		-- config
@@ -22,7 +22,7 @@ return {
 				lualine_c = { {
 					'filename',
 					file_status = true, -- displays file status (readonly status, modified status)
-					path = 0       -- 0 = just filename, 1 = relative path, 2 = absolute path
+					path = 1       -- 0 = just filename, 1 = relative path, 2 = absolute path
 				} },
 				lualine_x = {
 					{
@@ -52,7 +52,10 @@ return {
 				lualine_a = {},
 				lualine_b = {},
 				lualine_c = {
-					{ "navic" },
+					{
+						"navic",
+						color = { bg = 'NONE' },
+					},
 				},
 				lualine_x = {},
 				lualine_y = {},

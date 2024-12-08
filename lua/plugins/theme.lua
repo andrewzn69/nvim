@@ -25,17 +25,21 @@ if hostname == 'arch' then
 				invert_tabline = false,
 				invert_intend_guides = false,
 				inverse = true, -- invert background for search, diffs, statuslines and errors
-				contrast = "", -- can be "hard", "soft" or empty string
+				contrast = "hard", -- can be "hard", "soft" or empty string
 				palette_overrides = {
 					dark1 = "#2C2C2C",
 					dark0 = "#1D2022",
-
 					bright_green = "#98971A",
 					bright_yellow = "#D79921",
 				},
 				overrides = {
+					-- ew
 					MiniIndentscopeSymbol = { fg = "#A89984" }, -- for mini.indentscope
 					SignColumn = { bg = "#1D2022" },       -- for sign column
+					DiagnosticSignError = { bg = "NONE", fg = "#FB4934" },
+					DiagnosticSignWarn = { bg = "NONE", fg = "#FFA500" },
+					DiagnosticSignInfo = { bg = "NONE", fg = "#83A598" },
+					DiagnosticSignHint = { bg = "NONE", fg = "#98971A" },
 				},
 				dim_inactive = false,
 				transparent_mode = false,
