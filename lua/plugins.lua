@@ -34,6 +34,7 @@ lazy.setup({
 		require("plugins.cursorline"),
 		require("plugins.dadbod"),
 		require("plugins.diffview"),
+		require("plugins.fidget"),
 		require("plugins.format"),
 		require("plugins.fzf"),
 		require("plugins.git"),
