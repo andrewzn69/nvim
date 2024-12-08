@@ -43,6 +43,7 @@ return {
 				"tailwindcss-language-server",
 				"terraform-ls",
 				"tflint",
+				"tinymist",
 				"typescript-language-server",
 				"yaml-language-server",
 				"yamlfmt",

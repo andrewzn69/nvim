@@ -78,24 +78,25 @@ return {
 
 		local servers = {
 			astro = require("plugins.lsp.servers.astro")(on_attach),
-			bashls = require("plugins.lsp.servers.bashls")(on_attach),
-			biome = require("plugins.lsp.servers.biome")(on_attach),
+			bashls = require("plugins.lsp.servers.bashls")(on_attach), -- formatter
+			biome = require("plugins.lsp.servers.biome")(on_attach), -- formatter
 			cssls = require("plugins.lsp.servers.cssls")(on_attach),
 			dockerls = {},
 			elixirls = {},
 			html = {},
-			intelephense = require("plugins.lsp.servers.phpls")(on_attach),
+			intelephense = require("plugins.lsp.servers.phpls")(on_attach), -- php
 			jsonls = {},
 			lua_ls = require("plugins.lsp.servers.luals")(on_attach),
-			marksman = {},
-			pyright = require("plugins.lsp.servers.pyright")(on_attach),
-			rust_analyzer = {},
-			tailwindcss = {},
-			terraformls = {},
-			tflint = {},
-			ts_ls = require("plugins.lsp.servers.ts_ls")(on_attach),
-			yamlls = {},
-			omnisharp = require("plugins.lsp.servers.omnisharp")(on_attach),
+			marksman = {},                                                -- markdown
+			pyright = require("plugins.lsp.servers.pyright")(on_attach),  -- python
+			rust_analyzer = {},                                           -- rust
+			tailwindcss = {},                                             -- css
+			terraformls = {},                                             -- terraform
+			tflint = {},                                                  -- terraform
+			tinymist = require("plugins.lsp.servers.tinymist")(on_attach), -- typst
+			ts_ls = require("plugins.lsp.servers.ts_ls")(on_attach),      -- typescript
+			yamlls = {},                                                  -- yaml
+			omnisharp = require("plugins.lsp.servers.omnisharp")(on_attach), -- csharp
 		}
 
 		local default_lsp_config = {
