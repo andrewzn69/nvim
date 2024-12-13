@@ -39,9 +39,9 @@ return {
 		})
 	end,
 	keys = {
-		{ "<leader>Dt", "<cmd>DBUIToggle<cr>", desc = "toggle ui" },
-		{ "<leader>Df", "<cmd>DBUIFindBuffer<cr>", desc = "find buffer" },
-		{ "<leader>Dr", "<cmd>DBUIRenameBuffer<cr>", desc = "rename buffer" },
+		{ "<leader>Dt", "<cmd>DBUIToggle<cr>",        desc = "toggle ui" },
+		{ "<leader>Df", "<cmd>DBUIFindBuffer<cr>",    desc = "find buffer" },
+		{ "<leader>Dr", "<cmd>DBUIRenameBuffer<cr>",  desc = "rename buffer" },
 		{ "<leader>Dq", "<cmd>DBUILastQueryInfo<cr>", desc = "last query " },
 	},
 }
