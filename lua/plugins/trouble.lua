@@ -16,23 +16,23 @@ return {
 			icons = require("utils.icons").trouble,
 		})
 		require("utils.remaps").map_virtual({
-			{ "<leader>t", group = "trouble", icon = { icon = " ", hl = "Constant" } },
+			{ "<leader>T", group = "trouble", icon = { icon = " ", hl = "Constant" } },
 			{ "<leader>ts", group = "symbols", icon = { icon = " ", hl = "Constant" } },
 		})
 	end,
 	keys = {
 		{
-			"<leader>tt",
+			"<leader>Tt",
 			"<cmd>Trouble diagnostics toggle<cr>",
 			desc = "trouble diagnostics",
 		},
 		{
-			"<leader>tT",
+			"<leader>TT",
 			"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
 			desc = "buffer diagnostics",
 		},
 		{
-			"<leader>ts",
+			"<leader>Ts",
 			"<cmd>Trouble symbols toggle focus=false<cr>",
 			desc = "symbols",
 		},
