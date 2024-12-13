@@ -39,10 +39,10 @@ keymap.set('', 'sj', '<C-w>j', { desc = 'Move to window below' })
 keymap.set('', 'sl', '<C-w>l', { desc = 'Move to right window' })
 
 -- Resize window
-keymap.set('n', '<C-w><left>', '<C-w><')
-keymap.set('n', '<C-w><right>', '<C-w>>')
-keymap.set('n', '<C-w><up>', '<C-w>+')
-keymap.set('n', '<C-w><down>', '<C-w>-')
+keymap.set('n', '<A-h>', '<C-w>>')
+keymap.set('n', '<A-j>', '<C-w>-')
+keymap.set('n', '<A-k>', '<C-w>+')
+keymap.set('n', '<A-l>', '<C-w><')
 
 -- Grammar check
 keymap.set('n', '<F6>', ':setlocal spell! spelllang=en_us<CR>')
