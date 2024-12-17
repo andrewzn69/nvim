@@ -49,3 +49,6 @@ keymap.set('n', '<F6>', ':setlocal spell! spelllang=en_us<CR>')
 
 -- Toggle Neo-tree
 keymap.set('n', '<leader>e', ':Neotree toggle<CR>', { desc = 'Toggle Neo-tree' })
+
+-- Exit terminal mode with <Esc>
+vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { desc = 'Exit terminal mode' })
