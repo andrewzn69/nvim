@@ -96,6 +96,7 @@ return {
 			tinymist = require("plugins.lsp.servers.tinymist")(on_attach), -- typst
 			ts_ls = require("plugins.lsp.servers.ts_ls")(on_attach),      -- typescript
 			yamlls = {},                                                  -- yaml
+			volar = require("plugins.lsp.servers.volar")(on_attach),      -- vue
 			omnisharp = require("plugins.lsp.servers.omnisharp")(on_attach), -- csharp
 		}
 
