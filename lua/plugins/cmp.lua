@@ -1,8 +1,7 @@
 return {
 	"hrsh7th/nvim-cmp",
 	event = "InsertEnter",
-	dependencies = {
-		"hrsh7th/cmp-nvim-lsp-signature-help",
+	dependencies = { "hrsh7th/cmp-nvim-lsp-signature-help",
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-buffer",
 		"hrsh7th/cmp-path",
@@ -42,10 +41,14 @@ return {
 			preselect = cmp.PreselectMode.None,
 			window = {
 				completion = cmp.config.window.bordered({
-					winhighlight = "Normal:Normal,FloatBorder:LspBorderBG,CursorLine:PmenuSel,Search:None",
+					winhighlight = "CmpNormal:CmpNormal,kokot:LspBorderBG,CursorLine:PmenuSel,Search:None",
 				}),
+				-- completion = {
+				-- 	border = "rounded",
+				-- 	winhighlight = "Normal:CmpNormal",
+				-- },
 				documentation = cmp.config.window.bordered({
-					winhighlight = "Normal:Normal,FloatBorder:LspBorderBG,CursorLine:PmenuSel,Search:None",
+					winhighlight = "CmpNormal:CmpNormal,kokot:LspBorderBG,CursorLine:PmenuSel,Search:None",
 				}),
 			},
 			---@diagnostic disable-next-line
