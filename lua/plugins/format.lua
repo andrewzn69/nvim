@@ -32,6 +32,7 @@ return {
 				sh = formatters.shell({ cmd = { "shfmt", "-i", "0", "-sr", "-kp" } }),
 				typescript = formatters.lsp,
 				typescriptreact = formatters.lsp,
+				vue = formatters.lsp,
 				yaml = formatters.lsp, -- does not work ?
 				markdown = formatters.lsp, -- does not work ?
 			},
