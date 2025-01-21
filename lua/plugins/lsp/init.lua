@@ -92,6 +92,7 @@ return {
 			rust_analyzer = {},                                           -- rust
 			tailwindcss = {},                                             -- css
 			terraformls = {},                                             -- terraform
+			texlab = require("plugins.lsp.servers.texlab")(on_attach),    -- latex
 			tflint = {},                                                  -- terraform
 			tinymist = require("plugins.lsp.servers.tinymist")(on_attach), -- typst
 			ts_ls = require("plugins.lsp.servers.ts_ls")(on_attach),      -- typescript
