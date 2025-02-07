@@ -16,7 +16,7 @@ return {
 				cpp = formatters.shell({ cmd = { "clang-format", "--style=file", "-i" } }), -- idk
 				css = formatters.lsp,
 				cs = formatters.lsp,
-				ex = formatters.lsp,
+				elixir = formatters.lsp,
 				go = formatters.lsp, --idk
 				html = formatters.lsp,
 				java = formatters.shell({
@@ -30,6 +30,7 @@ return {
 				python = formatters.lsp,
 				rust = formatters.lsp,
 				sh = formatters.shell({ cmd = { "shfmt", "-i", "0", "-sr", "-kp" } }),
+				tex = formatters.lsp,
 				typescript = formatters.lsp,
 				typescriptreact = formatters.lsp,
 				vue = formatters.lsp,
