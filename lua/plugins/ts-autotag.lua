@@ -1,6 +1,8 @@
 return {
 	"windwp/nvim-ts-autotag",
-	event = "VeryLazy",
+	event = {
+		"InsertEnter *.tsx,*.jsx,*.html,*.vue,*.svelte,*.astro"
+	},
 	config = function()
 		local autotag = require("nvim-ts-autotag")
 		autotag.setup()
