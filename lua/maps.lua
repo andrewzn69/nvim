@@ -51,4 +51,14 @@ keymap.set('n', '<F6>', ':setlocal spell! spelllang=en_us<CR>')
 keymap.set('n', '<leader>e', ':Neotree toggle<CR>', { desc = 'Toggle Neo-tree' })
 
 -- Exit terminal mode with <Esc>
-vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { desc = 'Exit terminal mode' })
+keymap.set('t', '<Esc>', [[<C-\><C-n>]], { desc = 'Exit terminal mode' })
+
+-- keymap.set('i', '<C-Backspace>', '<C-w>', { desc = 'Delete previous word' })
+
+-- if vim.env.term == "xterm-kitty" then then then then
+-- 	keymap.set("i", "<C-BS>", "<C-W>")
+--
+--
+--
+-- fklsdjf lksdjlkf jlksdjflksdjlk
+-- end
