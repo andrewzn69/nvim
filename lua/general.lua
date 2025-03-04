@@ -29,28 +29,6 @@ vim.opt.undodir = vim.fn.stdpath("data") .. "/undo"
 -- scroll bounds
 vim.o.scrolloff = 13
 
--- fuzzy find
-vim.opt.path:append("**")
-
--- lazy file name tab completion
-vim.opt.wildmode = "list:longest,list:full"
-vim.opt.wildmenu = true
-vim.opt.wildignorecase = true
-vim.opt.wildoptions = 'pum'
-
--- ignore files nvim does not use
-vim.opt.wildignore:append(".git,.hg,.svn")
-vim.opt.wildignore:append(".aux,*.out,*.toc")
-vim.opt.wildignore:append(".o,*.obj,*.exe,*.dll,*.manifest,*.rbc,*.class")
-vim.opt.wildignore:append(".ai,*.bmp,*.gif,*.ico,*.jpg,*.jpeg,*.png,*.psd,*.webp")
-vim.opt.wildignore:append(".avi,*.divx,*.mp4,*.webm,*.mov,*.m2ts,*.mkv,*.vob,*.mpg,*.mpeg")
-vim.opt.wildignore:append(".mp3,*.oga,*.ogg,*.wav,*.flac")
-vim.opt.wildignore:append(".eot,*.otf,*.ttf,*.woff")
-vim.opt.wildignore:append(".doc,*.pdf,*.cbr,*.cbz")
-vim.opt.wildignore:append(".zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz,*.kgb")
-vim.opt.wildignore:append(".swp,.lock,.DS_Store,._*")
-vim.opt.wildignore:append(".,..")
-vim.opt.wildignore:append(" */node_modules/* ")
 
 -- use markdown syntax highlighting for mdx
 -- no mdx treeshitter support yet?
@@ -108,4 +86,25 @@ vim.api.nvim_create_autocmd("BufEnter", {
 			vim.cmd("cd " .. vim.fn.fnamemodify(git_root, ":h"))
 		end
 	end,
+})
+
+-- On VimEnter, enables recursive path search and ignores irrelevant files.
+vim.api.nvim_create_autocmd("VimEnter", {
+	callback = function()
+		vim.opt.path:append("**")
+		vim.opt.wildignore:append(
+			".git,.hg,.svn" ..
+			".aux,*.out,*.toc" ..
+			".o,*.obj,*.exe,*.dll,*.manifest,*.rbc,*.class" ..
+			".ai,*.bmp,*.gif,*.ico,*.jpg,*.jpeg,*.png,*.psd,*.webp" ..
+			".avi,*.divx,*.mp4,*.webm,*.mov,*.m2ts,*.mkv,*.vob,*.mpg,*.mpeg" ..
+			".mp3,*.oga,*.ogg,*.wav,*.flac" ..
+			".eot,*.otf,*.ttf,*.woff" ..
+			".doc,*.pdf,*.cbr,*.cbz" ..
+			".zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz,*.kgb" ..
+			".swp,.lock,.DS_Store,._*" ..
+			".,.." ..
+			" */node_modules/* "
+		)
+	end
 })
