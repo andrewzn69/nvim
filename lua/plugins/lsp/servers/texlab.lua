@@ -7,18 +7,17 @@ return function(on_attach)
 		end,
 		cmd = { "texlab" },
 		filetypes = { "tex", "bib" },
-		root_dir = util.root_pattern("*.tex", ".git"),
+		root_dir = util.root_pattern(".latexmkrc"),
 		settings = {
 			texlab = {
 				log_level = vim.lsp.protocol.MessageType.Log,
 				auxDirectory = "build",
 				bibtexFormatter = "texlab",
 				build = {
-					executable = "tectonic",
+					executable = "latexmk",
 					args = {
-						"-X",
-						"compile",
-						"%f",
+						"-g",
+						"-f",
 					},
 					onSave = true,
 				},
@@ -34,6 +33,7 @@ return function(on_attach)
 				formatterLineLength = 120,
 				latexFormatter = "latexindent",
 				latexindent = { modifyLineBreaks = false },
+				bibliography = { "chapters/appendix.bib" },
 			},
 		},
 	}
