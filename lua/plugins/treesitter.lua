@@ -4,7 +4,9 @@ return {
 		"RRethy/nvim-treesitter-textsubjects",
 		"nvim-treesitter/nvim-treesitter-textobjects",
 	},
-	event = { "BufReadPost", "BufNewFile" },
+	event = "BufReadPost",
+	cmd = { "TSInstall", "TSBufEnable", "TSBufDisable" },
+	build = ":TSUpdate",
 	config = function()
 		local treesitter = require("nvim-treesitter.configs")
 
@@ -176,8 +178,5 @@ return {
 		--
 		-- r.map_virtual("[[", "Go to previous class (start)")
 		-- r.map_virtual("[]", "Go to previous class (end)")
-	end,
-	build = function()
-		vim.cmd [[TSUpdate]]
 	end,
 }
