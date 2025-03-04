@@ -1,5 +1,6 @@
 return {
 	"williamboman/mason.nvim",
+	event = "VeryLazy",
 	build = ":MasonInstallAll",
 	config = function()
 		local f = require("utils.functions")
@@ -8,6 +9,10 @@ return {
 				border = "shadow",
 				icons = require("utils.icons").mason,
 				zindex = 99,
+			},
+			registries = {
+				'github:mason-org/mason-registry',
+				'github:crashdummyy/mason-registry',
 			},
 		})
 		f.cmd("MasonInstallAll", function()
@@ -42,12 +47,16 @@ return {
 				"stylua",
 				"tailwindcss-language-server",
 				"terraform-ls",
+				"texlab",
 				"tflint",
 				"tinymist",
 				"typescript-language-server",
+				"volar",
 				"yaml-language-server",
 				"yamlfmt",
 				"yamllint",
+				"bibtex-tidy",
+				"latexindent",
 			}
 			vim.cmd('MasonInstall ' .. table.concat(ensure_installed, ' '))
 		end, { desc = "install all lsp tools" })
