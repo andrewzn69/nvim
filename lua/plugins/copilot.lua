@@ -2,7 +2,7 @@ return {
 	-- copilot
 	{
 		"zbirenbaum/copilot.lua",
-		lazy = false,
+		lazy = true,
 		cmd = "Copilot",
 		build = ":Copilot auth",
 		opts = {
