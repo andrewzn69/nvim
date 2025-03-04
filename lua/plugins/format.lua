@@ -36,6 +36,9 @@ return {
 				vue = formatters.lsp,
 				yaml = formatters.lsp, -- does not work ?
 				markdown = formatters.lsp, -- does not work ?
+				bib = formatters.lsp,
+				tex = formatters.lsp,
+				plaintex = formatters.lsp
 			},
 			fallback_formatter = {
 				formatters.remove_trailing_whitespace,
