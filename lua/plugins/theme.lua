@@ -1,6 +1,19 @@
 local hostname = vim.loop.os_gethostname()
 
-if hostname == 'arch' then
+if hostname == 'cheddar' then
+	return {
+		'sainnhe/everforest',
+		lazy = false,
+		priority = 1000,
+		config = function()
+			vim.g.everforest_enable_italic = true
+			vim.g.everforest_transparent_background = 2
+			vim.g.everforest_background = 'hard'
+			vim.g.everforest_better_performance = 1
+			vim.cmd.colorscheme('everforest')
+		end,
+	}
+elseif hostname == 'arch' then
 	return {
 		"ellisonleao/gruvbox.nvim",
 		lazy = false,
@@ -8,7 +21,7 @@ if hostname == 'arch' then
 		config = function()
 			local gruvbox = require("gruvbox")
 			gruvbox.setup({
-				terminal_colors = true, -- add neovim terminal colors
+				terminal_colors = true,
 				undercurl = true,
 				underline = true,
 				bold = true,
@@ -24,8 +37,8 @@ if hostname == 'arch' then
 				invert_signs = false,
 				invert_tabline = false,
 				invert_intend_guides = false,
-				inverse = true, -- invert background for search, diffs, statuslines and errors
-				contrast = "hard", -- can be "hard", "soft" or empty string
+				inverse = true,
+				contrast = "hard",
 				palette_overrides = {
 					dark1 = "#2C2C2C",
 					dark0 = "#1D2022",
@@ -33,9 +46,8 @@ if hostname == 'arch' then
 					bright_yellow = "#D79921",
 				},
 				overrides = {
-					-- ew
-					MiniIndentscopeSymbol = { fg = "#A89984" }, -- for mini.indentscope
-					SignColumn = { bg = "#1D2022" },       -- for sign column
+					MiniIndentscopeSymbol = { fg = "#A89984" },
+					SignColumn = { bg = "#1D2022" },
 					DiagnosticSignError = { bg = "NONE", fg = "#FB4934" },
 					DiagnosticSignWarn = { bg = "NONE", fg = "#FFA500" },
 					DiagnosticSignInfo = { bg = "NONE", fg = "#83A598" },
@@ -47,7 +59,7 @@ if hostname == 'arch' then
 			vim.cmd("colorscheme gruvbox")
 		end,
 	}
-elseif hostname == 'archnb' or 'fedoranb' then
+elseif hostname == 'archnb' then
 	return {
 		"nyoom-engineering/oxocarbon.nvim",
 		lazy = false,
