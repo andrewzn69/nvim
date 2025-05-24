@@ -97,7 +97,7 @@ return {
 			tinymist = require("plugins.lsp.servers.tinymist")(on_attach), -- typst
 			ts_ls = require("plugins.lsp.servers.ts_ls")(on_attach),      -- typescript
 			yamlls = {},                                                  -- yaml
-			volar = require("plugins.lsp.servers.volar")(on_attach),      -- vue
+			vue_ls = require("plugins.lsp.servers.vue_ls")(on_attach),    -- vue
 			omnisharp = require("plugins.lsp.servers.omnisharp")(on_attach), -- csharp
 		}
 
@@ -119,19 +119,22 @@ return {
 
 		local present_mason, mason = pcall(require, "mason-lspconfig")
 		if present_mason then
-			mason.setup({ ensure_installed = server_names })
-			mason.setup_handlers({
-				function(server)
-					local merged_config = vim.tbl_deep_extend("force", default_lsp_config, server_configs[server] or {})
-					lspconfig[server].setup(merged_config)
-					if server == "rust_analyzer" then
-						local present_rust_tools, rust_tools = pcall(require, "rust-tools")
-						if present_rust_tools then
-							rust_tools.setup({ server = merged_config })
-						end
-					end
-				end,
+			mason.setup({
+				ensure_installed = server_names,
+				automatic_installation = true,
 			})
+
+			for server_name, server_config in pairs(server_configs) do
+				local merged_config = vim.tbl_deep_extend("force", default_lsp_config, server_configs[server] or {})
+				lspconfig[server_name].setup(merged_config)
+
+				if server_name == "rust_analyzer" then
+					local present_rust_tools, rust_tools = pcall(require, "rust-tools")
+					if present_rust_tools then
+						rust_tools.setup({ server = merged_config })
+					end
+				end
+			end
 		end
 	end,
 }
