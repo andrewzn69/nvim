@@ -28,15 +28,23 @@ return {
 			end
 		end
 
-		local signs = {
-			{ name = "DiagnosticSignError", text = icons.diagnostics.error },
-			{ name = "DiagnosticSignWarn",  text = icons.diagnostics.warning },
-			{ name = "DiagnosticSignHint",  text = icons.diagnostics.hint },
-			{ name = "DiagnosticSignInfo",  text = icons.diagnostics.information },
-		}
-		for _, sign in ipairs(signs) do
-			vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-		end
+		vim.diagnostic.config({
+			signs = {
+				text = {
+					[vim.diagnostic.severity.ERROR] = icons.diagnostics.error,
+					[vim.diagnostic.severity.WARN] = icons.diagnostics.warning,
+					[vim.diagnostic.severity.HINT] = icons.diagnostics.hint,
+					[vim.diagnostic.severity.INFO] = icons.diagnostics.information,
+				},
+				numhl = "",
+				texthl = {
+					[vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+					[vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+					[vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+					[vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+				},
+			},
+		})
 
 		local config = {
 			virtual_text = false, -- appears after the line
@@ -86,7 +94,7 @@ return {
 			html = {},
 			intelephense = require("plugins.lsp.servers.phpls")(on_attach), -- php
 			jsonls = {},
-			lua_ls = require("plugins.lsp.servers.luals")(on_attach),
+			lua_ls = require("plugins.lsp.servers.lua_ls")(on_attach),
 			marksman = {},                                                -- markdown
 			pyright = require("plugins.lsp.servers.pyright")(on_attach),  -- python
 			rust_analyzer = {},                                           -- rust
