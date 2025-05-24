@@ -34,6 +34,7 @@ return {
 				"markdown",
 				"markdown_inline",
 				"php",
+				"prisma",
 				"python",
 				"rasi",
 				"regex",
