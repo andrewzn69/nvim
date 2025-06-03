@@ -7,11 +7,12 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
 	},
-	event = { "BufReadPost", "BufNewFile" },
+	event = { "BufReadPre", "BufNewFile" },
 	config = function()
 		require("neodev").setup({})
 		require("lsp_lines").setup()
 		require("spellwarn").setup()
+
 		local lspconfig = require("lspconfig")
 		local remaps = require("plugins.lsp.remaps")
 		local icons = require("utils.icons")
@@ -28,27 +29,19 @@ return {
 			end
 		end
 
-		vim.diagnostic.config({
-			signs = {
-				text = {
-					[vim.diagnostic.severity.ERROR] = icons.diagnostics.error,
-					[vim.diagnostic.severity.WARN] = icons.diagnostics.warning,
-					[vim.diagnostic.severity.HINT] = icons.diagnostics.hint,
-					[vim.diagnostic.severity.INFO] = icons.diagnostics.information,
-				},
-				numhl = "",
-				texthl = {
-					[vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
-					[vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
-					[vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
-					[vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
-				},
-			},
-		})
+		local signs = {
+			{ name = "DiagnosticSignError", text = icons.diagnostics.error },
+			{ name = "DiagnosticSignWarn",  text = icons.diagnostics.warning },
+			{ name = "DiagnosticSignHint",  text = icons.diagnostics.hint },
+			{ name = "DiagnosticSignInfo",  text = icons.diagnostics.information },
+		}
+		for _, sign in ipairs(signs) do
+			vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+		end
 
 		local config = {
-			virtual_text = false, -- appears after the line
-			virtual_lines = false, -- appears under the line
+			virtual_text = false,
+			virtual_lines = false,
 			signs = {
 				active = signs,
 			},
@@ -86,27 +79,26 @@ return {
 
 		local servers = {
 			astro = require("plugins.lsp.servers.astro")(on_attach),
-			bashls = require("plugins.lsp.servers.bashls")(on_attach), -- formatter
-			biome = require("plugins.lsp.servers.biome")(on_attach), -- formatter
+			bashls = require("plugins.lsp.servers.bashls")(on_attach),
+			biome = require("plugins.lsp.servers.biome")(on_attach),
 			cssls = require("plugins.lsp.servers.cssls")(on_attach),
 			dockerls = {},
 			elixirls = {},
 			html = {},
-			intelephense = require("plugins.lsp.servers.phpls")(on_attach), -- php
+			intelephense = require("plugins.lsp.servers.phpls")(on_attach),
 			jsonls = {},
 			lua_ls = require("plugins.lsp.servers.lua_ls")(on_attach),
-			marksman = {},                                                -- markdown
-			pyright = require("plugins.lsp.servers.pyright")(on_attach),  -- python
-			rust_analyzer = {},                                           -- rust
-			tailwindcss = {},                                             -- css
-			terraformls = {},                                             -- terraform
-			texlab = require("plugins.lsp.servers.texlab")(on_attach),    -- latex
-			tflint = {},                                                  -- terraform
-			tinymist = require("plugins.lsp.servers.tinymist")(on_attach), -- typst
-			ts_ls = require("plugins.lsp.servers.ts_ls")(on_attach),      -- typescript
-			yamlls = {},                                                  -- yaml
-			vue_ls = require("plugins.lsp.servers.vue_ls")(on_attach),    -- vue
-			omnisharp = require("plugins.lsp.servers.omnisharp")(on_attach), -- csharp
+			marksman = {},
+			pyright = require("plugins.lsp.servers.pyright")(on_attach),
+			rust_analyzer = {},
+			tailwindcss = {},
+			terraformls = {},
+			texlab = require("plugins.lsp.servers.texlab")(on_attach),
+			tflint = {},
+			tinymist = require("plugins.lsp.servers.tinymist")(on_attach),
+			yamlls = {},
+			omnisharp = require("plugins.lsp.servers.omnisharp")(on_attach),
+			ts_ls = require("plugins.lsp.servers.ts_ls")(on_attach),
 		}
 
 		local default_lsp_config = {
@@ -125,23 +117,25 @@ return {
 			server_configs[server_name] = server_config
 		end
 
-		local present_mason, mason = pcall(require, "mason-lspconfig")
-		if present_mason then
-			mason.setup({
+		local present_mason_lspconfig, mason_lspconfig = pcall(require, "mason-lspconfig")
+		if present_mason_lspconfig then
+			mason_lspconfig.setup({
 				ensure_installed = server_names,
 				automatic_installation = true,
+				automatic_enable = false, -- disables auto lspconfig setup
 			})
+		end
 
-			for server_name, server_config in pairs(server_configs) do
-				local merged_config = vim.tbl_deep_extend("force", default_lsp_config, server_configs[server] or {})
-				lspconfig[server_name].setup(merged_config)
-
-				if server_name == "rust_analyzer" then
-					local present_rust_tools, rust_tools = pcall(require, "rust-tools")
-					if present_rust_tools then
-						rust_tools.setup({ server = merged_config })
-					end
+		-- Manual setup per LSP server
+		for server, config in pairs(server_configs) do
+			local merged_config = vim.tbl_deep_extend("force", default_lsp_config, config or {})
+			if server == "rust_analyzer" then
+				local present_rust_tools, rust_tools = pcall(require, "rust-tools")
+				if present_rust_tools then
+					rust_tools.setup({ server = merged_config })
 				end
+			else
+				lspconfig[server].setup(merged_config)
 			end
 		end
 	end,
