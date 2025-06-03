@@ -29,21 +29,16 @@ return {
 			end
 		end
 
-		local signs = {
-			{ name = "DiagnosticSignError", text = icons.diagnostics.error },
-			{ name = "DiagnosticSignWarn",  text = icons.diagnostics.warning },
-			{ name = "DiagnosticSignHint",  text = icons.diagnostics.hint },
-			{ name = "DiagnosticSignInfo",  text = icons.diagnostics.information },
-		}
-		for _, sign in ipairs(signs) do
-			vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-		end
-
 		local config = {
 			virtual_text = false,
 			virtual_lines = false,
 			signs = {
-				active = signs,
+				text = {
+					[vim.diagnostic.severity.ERROR] = icons.diagnostics.error,
+					[vim.diagnostic.severity.WARN] = icons.diagnostics.warning,
+					[vim.diagnostic.severity.HINT] = icons.diagnostics.hint,
+					[vim.diagnostic.severity.INFO] = icons.diagnostics.information,
+				},
 			},
 			flags = {
 				debounce_text_changes = 200,
