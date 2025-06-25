@@ -31,6 +31,7 @@ return {
 				python = formatters.lsp,
 				rust = formatters.lsp,
 				sh = formatters.shell({ cmd = { "shfmt", "-i", "0", "-sr", "-kp" } }),
+				terraform = formatters.lsp,
 				typescript = formatters.lsp,
 				typescriptreact = formatters.lsp,
 				vue = formatters.lsp,
