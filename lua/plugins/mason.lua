@@ -27,6 +27,7 @@ return {
 				"dockerfile-language-server",
 				"eslint-lsp",
 				"gopls",
+				"helm-ls",
 				"html-lsp",
 				"intelephense",
 				"isort",
