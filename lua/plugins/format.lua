@@ -18,6 +18,7 @@ return {
 				cs = formatters.lsp,
 				elixir = formatters.lsp,
 				go = formatters.lsp, --idk
+				helm = formatters.lsp,
 				html = formatters.lsp,
 				java = formatters.shell({
 					cmd = { "astyle", "-A2", "-s2", "-c", "-J", "-n", "-q", "-z2", "-xC80" },
