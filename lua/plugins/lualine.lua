@@ -22,7 +22,7 @@ return {
 				theme = 'auto',
 				section_separators = { left = '', right = '' },
 				component_separators = { left = '', right = '' },
-				disabled_filetypes = { 'alpha' }
+				disabled_filetypes = { 'alpha', 'Avante', 'AvanteInput' }
 			},
 			sections = {
 				lualine_a = { 'mode' },
