@@ -12,7 +12,12 @@ return {
 			delay = 400,
 			triggers = {
 				{ "<auto>", mode = "nixsotc" },
-				{ "a", mode = { "n", "v" } },
+				{ "a",      mode = { "n", "v" } },
+			},
+			win = {
+				no_overlap = true,
+				border = "rounded",
+				padding = { 1, 2 },
 			},
 		})
 	end,
