@@ -21,7 +21,6 @@ return {
 					anchor = "center",
 					height = 0.8,
 					width = 0.9,
-					preview_width = 0.6,
 					prompt_position = "bottom",
 				},
 				initial_mode = "normal",
