@@ -108,3 +108,23 @@ vim.api.nvim_create_autocmd("VimEnter", {
 		)
 	end
 })
+
+-- disable cursorcolumn for neo-tree and terminal
+vim.api.nvim_create_autocmd("BufWinEnter", {
+	pattern = "*",
+	callback = function()
+		if vim.bo.filetype == "neo-tree" or "toggleterm" then
+			vim.opt_local.cursorcolumn = false
+		end
+	end,
+})
+
+-- disable cursorline for terminal
+vim.api.nvim_create_autocmd("BufEnter", {
+	pattern = "*",
+	callback = function()
+		if vim.bo.filetype == "toggleterm" then
+			vim.opt_local.cursorline = false
+		end
+	end,
+})
