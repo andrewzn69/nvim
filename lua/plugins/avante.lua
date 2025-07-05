@@ -13,16 +13,16 @@ return {
 			windows = {
 				position = "right",
 				wrap = true,
-				width = 90,
+				width = 20,
 				sidebar_header = {
-					enabled = true,
+					enabled = false,
 					align = "center",
 					rounded = true,
 				},
 				input = {
 					prefix = "> ",
 					height = 8,
-					-- provider = "snacks",
+					provider = "snacks",
 				},
 				edit = {
 					border = "rounded",
@@ -36,6 +36,10 @@ return {
 				},
 			},
 			providers = {
+				copilot = {
+					timeout = 30000,
+					model = "gpt-4.1"
+				},
 				openrouter = {
 					__inherited_from = "openai",
 					endpoint = "https://openrouter.ai/api/v1",
@@ -89,7 +93,11 @@ return {
 		}
 	},
 	vim.api.nvim_set_hl(0, "AvanteSidebarWinHorizontalSeparator", {
-		fg = "#ff0000",
-		bg = "#ff0000"
-	})
+		fg = "#1D2021",
+		bg = "#1D2021"
+	}),
+	vim.api.nvim_set_hl(0, "AvanteSidebarWinSeparator", {
+		fg = "#665C54",
+		bg = "#1D2021"
+	}),
 }
