@@ -57,6 +57,9 @@ elseif hostname == 'arch' then
 				transparent_mode = false,
 			})
 			vim.cmd("colorscheme gruvbox")
+			vim.api.nvim_set_hl(0, "NormalFloat", {
+				bg = "#1D2022"
+			})
 		end,
 	}
 elseif hostname == 'archnb' then
