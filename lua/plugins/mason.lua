@@ -35,6 +35,7 @@ return {
 				"json-lsp",
 				"jsonlint",
 				"lua-language-server",
+				"markdownlint",
 				"php-cs-fixer",
 				"prettier",
 				"prettierd",
