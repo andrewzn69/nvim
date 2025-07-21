@@ -4,6 +4,7 @@ local keymap = vim.keymap
 vim.g.mapleader = " "
 
 keymap.set('n', 'x', '"_x', { desc = 'Delete character without yanking' })
+keymap.set('x', 'p', 'P', { noremap = true, silent = true, desc = 'Disable clipboard overwrite on paste' })
 
 -- Increment/decrement
 keymap.set('n', '+', '<C-a>', { desc = 'Increment number' })
