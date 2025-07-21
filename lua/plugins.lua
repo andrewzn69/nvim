@@ -57,7 +57,7 @@ lazy.setup({
 		require("plugins.treesitter"),
 		require("plugins.trouble"),
 		require("plugins.ts-autotag"),
-		require("plugins.ts-errors"),
+		-- require("plugins.ts-errors"),
 		require("plugins.wakatime"),
 		require("plugins.which-key"),
 		require("plugins.yuck"),
