@@ -29,7 +29,7 @@ return {
 				nix = formatters.shell({ cmd = { "nixpkgs-fmt" } }),                       --idk
 				php = formatters.shell({ cmd = { "php-cs-fixer", "fix", "--rules=@PSR12" } }), --idk
 				prisma = formatters.lsp,
-				python = formatters.lsp,
+				python = formatters.none_ls,
 				rust = formatters.lsp,
 				sh = formatters.shell({ cmd = { "shfmt", "-i", "0", "-sr", "-kp" } }),
 				terraform = formatters.lsp,
