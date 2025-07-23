@@ -27,7 +27,7 @@ return {
 				"git_config",
 				"git_rebase",
 				"hcl",
-				"helm",
+				-- "helm",
 				"html",
 				"hyprlang",
 				"javascript",
@@ -132,6 +132,9 @@ return {
 			},
 
 		})
+
+		local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+		parser_config.gotmpl.used_by = { "gohtmltmpl", "gotexttmpl", "gotmpl", "helm" }
 
 		vim.filetype.add({
 			pattern = { [".*/hypr/.*%.conf"] = "hyprlang" },
