@@ -80,6 +80,7 @@ return {
 			dockerls = {},
 			elixirls = {},
 			html = {},
+			hyprls = {},
 			intelephense = require("plugins.lsp.servers.phpls")(on_attach),
 			jsonls = {},
 			lua_ls = require("plugins.lsp.servers.lua_ls")(on_attach),
@@ -94,6 +95,7 @@ return {
 			yamlls = {},
 			omnisharp = require("plugins.lsp.servers.omnisharp")(on_attach),
 			ts_ls = require("plugins.lsp.servers.ts_ls")(on_attach),
+			-- helm_ls = {},
 		}
 
 		local default_lsp_config = {

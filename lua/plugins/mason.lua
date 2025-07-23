@@ -29,6 +29,7 @@ return {
 				"gopls",
 				"helm-ls",
 				"html-lsp",
+				"hyprls",
 				"intelephense",
 				"isort",
 				"jq",
