@@ -39,6 +39,7 @@ lazy.setup({
 		require("plugins.format"),
 		-- require("plugins.fzf"),
 		require("plugins.git"),
+		require("plugins.helm"),
 		require("plugins.indent"),
 		require("plugins.live-server"),
 		require("plugins.lsp"),
