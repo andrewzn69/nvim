@@ -39,7 +39,7 @@ return {
 			},
 			lsp = {
 				auto_attach = true,
-				preference = nil,
+				preference = { "helm_ls", "yamlls" },
 			},
 			highlight = true,
 			separator = " > ",
