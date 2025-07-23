@@ -95,7 +95,7 @@ return {
 			yamlls = {},
 			omnisharp = require("plugins.lsp.servers.omnisharp")(on_attach),
 			ts_ls = require("plugins.lsp.servers.ts_ls")(on_attach),
-			-- helm_ls = {},
+			helm_ls = {},
 		}
 
 		local default_lsp_config = {
