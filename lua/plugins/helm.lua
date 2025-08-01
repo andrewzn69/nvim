@@ -1,6 +1,7 @@
 return {
 	"towolf/vim-helm",
 	lazy = false,
+	priority = 1000,
 	config = function()
 		-- disable and clear diagnostics for helm filetype
 		vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
