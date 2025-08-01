@@ -43,13 +43,11 @@ return {
 			window = {
 				completion = cmp.config.window.bordered({
 					winhighlight = "CmpNormal:CmpNormal,kokot:LspBorderBG,CursorLine:PmenuSel,Search:None",
+					border = "single"
 				}),
-				-- completion = {
-				-- 	border = "rounded",
-				-- 	winhighlight = "Normal:CmpNormal",
-				-- },
 				documentation = cmp.config.window.bordered({
 					winhighlight = "CmpNormal:CmpNormal,kokot:LspBorderBG,CursorLine:PmenuSel,Search:None",
+					border = "single"
 				}),
 			},
 			---@diagnostic disable-next-line
@@ -87,7 +85,7 @@ return {
 				{ name = "vim-dadbod-completion",   group_index = 1 },
 				{ name = "path",                    group_index = 2 },
 				{ name = "buffer",                  keyword_length = 2,  max_item_count = 5, group_index = 2 },
-				{ name = "copilot",                 group_index = 2 },
+				-- { name = "copilot",                 group_index = 2 },
 			},
 		})
 		local presentAutopairs, cmp_autopairs = pcall(require, "nvim-autopairs.completion.cmp")
