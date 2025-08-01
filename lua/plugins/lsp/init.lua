@@ -82,6 +82,7 @@ return {
 			html = {},
 			hyprls = {},
 			intelephense = require("plugins.lsp.servers.phpls")(on_attach),
+			jinja_lsp = {},
 			jsonls = {},
 			lua_ls = require("plugins.lsp.servers.lua_ls")(on_attach),
 			marksman = {},

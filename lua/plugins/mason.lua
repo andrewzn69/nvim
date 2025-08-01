@@ -32,6 +32,7 @@ return {
 				"hyprls",
 				"intelephense",
 				"isort",
+				"jinja-lsp",
 				"jq",
 				"json-lsp",
 				"jsonlint",
