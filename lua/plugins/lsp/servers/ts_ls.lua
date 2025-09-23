@@ -1,4 +1,3 @@
-local util = require 'lspconfig.util'
 return function(on_attach)
 	return {
 		on_attach = function(client, bufnr)
@@ -17,8 +16,8 @@ return function(on_attach)
 		init_options = {
 			hostInfo = "neovim",
 		},
-		-- root_dir = util.root_pattern("package.json", "package-lock.json", "tsconfig.json", "jsconfig.json", ".git"),
-		root_dir = util.find_node_modules_ancestor,
+		-- root_dir = vim.fs.root(0, {"package.json", "package-lock.json", "tsconfig.json", "jsconfig.json", ".git"}),
+		root_dir = vim.fs.root(0, {'node_modules'}) or vim.fs.root(0, {'package.json', 'tsconfig.json', 'jsconfig.json', '.git'}),
 		single_file_support = true,
 	}
 end

@@ -1,4 +1,3 @@
-local util = require 'lspconfig.util'
 
 return function(on_attach)
 	return {
@@ -7,7 +6,7 @@ return function(on_attach)
 		end,
 		cmd = { "texlab" },
 		filetypes = { "tex", "bib" },
-		root_dir = util.root_pattern(".latexmkrc"),
+		root_dir = vim.fs.root(0, {".latexmkrc"}),
 		settings = {
 			texlab = {
 				log_level = vim.lsp.protocol.MessageType.Log,

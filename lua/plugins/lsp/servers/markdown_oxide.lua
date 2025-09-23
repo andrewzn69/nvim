@@ -1,4 +1,3 @@
-local util = require 'lspconfig.util'
 return function(on_attach)
 	return {
 		on_attach = function(client, bufnr)
@@ -6,6 +5,6 @@ return function(on_attach)
 		end,
 		cmd = { "markdown_oxide" },
 		filetypes = { "markdown", "mdx" },
-		root_dir = util.root_pattern(".git", vim.fn.getcwd()),
+		root_dir = vim.fs.root(0, {".git"}) or vim.fn.getcwd(),
 	}
 end

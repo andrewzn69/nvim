@@ -1,4 +1,3 @@
-local util = require 'lspconfig.util'
 return function(on_attach)
 	return {
 		on_attach = function(client, bufnr)

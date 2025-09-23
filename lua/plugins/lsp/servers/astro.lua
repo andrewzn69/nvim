@@ -1,8 +1,6 @@
-local util = require 'lspconfig.util'
-
 local function get_typescript_server_path(root_dir)
 	local project_root = vim.fs.find('node_modules', { path = root_dir, upward = true })[1]
-  return project_root and (util.path.join(project_root, 'typescript', 'lib')) or ''
+  return project_root and vim.fs.joinpath(project_root, 'typescript', 'lib') or ''
 end
 
 return function(on_attach)
@@ -14,7 +12,7 @@ return function(on_attach)
 		end,
 		cmd = { 'astro-ls', '--stdio' },
 		filetypes = { 'astro' },
-		root_dir = util.root_pattern('package.json', 'tsconfig.json', 'jsconfig.json', '.git'),
+		root_dir = vim.fs.root(0, {'package.json', 'tsconfig.json', 'jsconfig.json', '.git'}),
 		init_options = {
 			typescript = {},
 		},

@@ -1,4 +1,3 @@
-local util = require 'lspconfig.util'
 
 return function(on_attach)
 	return {
@@ -20,7 +19,7 @@ return function(on_attach)
 			'typescriptreact',
 			'vue',
 		},
-		root_dir = util.root_pattern('biome.json', 'biome.jsonc'),
+		root_dir = vim.fs.root(0, {'biome.json', 'biome.jsonc'}),
 		single_file_support = false,
 		docs = {
 			description = [[

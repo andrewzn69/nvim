@@ -1,4 +1,3 @@
-local util = require 'lspconfig.util'
 return function(on_attach)
 	return {
 		on_attach = function(client, bufnr)
@@ -9,7 +8,7 @@ return function(on_attach)
 			GLOB_PATTERN = "*@(nginx.conf)",
 		},
 		filetypes = { "nginx" },
-		root_dir = util.find_git_ancestor,
+		root_dir = vim.fs.root(0, {'.git'}),
 		single_file_support = true,
 	}
 end

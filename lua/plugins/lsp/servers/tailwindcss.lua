@@ -1,4 +1,3 @@
-local util = require 'lspconfig.util'
 return function(on_attach)
 	return {
 		on_attach = function(client, bufnr)
@@ -50,7 +49,7 @@ return function(on_attach)
 				eruby = "erb"
 			}
 		},
-		root_dir = util.root_pattern(
+		root_dir = vim.fs.root(0, {
 			'tailwind.config.js',
 			'tailwind.config.cjs',
 			'tailwind.config.mjs',
@@ -62,7 +61,7 @@ return function(on_attach)
 			'package.json',
 			'node_modules',
 			'.git'
-		),
+		}),
 		single_file_support = true,
 		settings = {
 			tailwindCSS = {

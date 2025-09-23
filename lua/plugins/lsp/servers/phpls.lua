@@ -1,4 +1,3 @@
-local util = require 'lspconfig.util'
 return function(on_attach)
 return {
 		on_attach = function(client, bufnr)
@@ -6,7 +5,7 @@ return {
 		end,
 		cmd = { "intelephense", "--stdio" },
 		filetypes =  { "php" },
-		root_dir = util.root_pattern("composer.json", ".git"),
+		root_dir = vim.fs.root(0, {"composer.json", ".git"}),
 		-- root_dir = util.find_git_ancestor,
 		single_file_support = true,
 	}
