@@ -1,6 +1,6 @@
 local hostname = vim.loop.os_gethostname()
 
-if hostname == 'cheddar' then
+if hostname == 'cheddar' or 'dev' then
 	return {
 		'sainnhe/everforest',
 		lazy = false,

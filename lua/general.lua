@@ -128,3 +128,16 @@ vim.api.nvim_create_autocmd("BufEnter", {
 		end
 	end,
 })
+
+-- osc 52 clipboard for ssh (works with kitty terminal)
+vim.g.clipboard = {
+	name = 'OSC 52',
+	copy = {
+		['+'] = require('vim.ui.clipboard.osc52').copy('+'),
+		['*'] = require('vim.ui.clipboard.osc52').copy('*'),
+	},
+	paste = {
+		['+'] = require('vim.ui.clipboard.osc52').paste('+'),
+		['*'] = require('vim.ui.clipboard.osc52').paste('*'),
+	},
+}

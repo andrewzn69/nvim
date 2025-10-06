@@ -27,7 +27,7 @@ lazy.setup({
 	spec = {
 		require("plugins.alpha"),
 		require("plugins.autopairs"),
-		require("plugins.avante"),
+		-- require("plugins.avante"),
 		require("plugins.cmp"),
 		require("plugins.colorizer"),
 		require("plugins.comment"),
@@ -46,7 +46,6 @@ lazy.setup({
 		require("plugins.lualine"),
 		require("plugins.luasnip"),
 		require("plugins.markdown"),
-		require("plugins.mason"),
 		require("plugins.navic"),
 		require("plugins.neotree"),
 		-- require("plugins.rzls"),

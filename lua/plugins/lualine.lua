@@ -61,6 +61,20 @@ return {
 				lualine_b = {},
 				lualine_c = {
 					{
+						"filetype",
+						icon_only = true,
+						separator = "",
+						padding = { left = 1, right = 0 },
+						color = { bg = 'NONE' },
+					},
+					{
+						"filename",
+						path = 0,
+						separator = " >",
+						padding = { left = 0, right = 0 },
+						color = { fg = vim.fn.synIDattr(vim.fn.hlID("NavicText"), "fg") },
+					},
+					{
 						"navic",
 						color = { bg = 'NONE' },
 					},

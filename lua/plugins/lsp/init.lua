@@ -4,7 +4,6 @@ return {
 		"folke/neodev.nvim",
 		"b0o/schemastore.nvim",
 		"ravibrock/spellwarn.nvim",
-		"williamboman/mason-lspconfig.nvim",
 		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
 	},
 	event = { "BufReadPre", "BufNewFile" },
