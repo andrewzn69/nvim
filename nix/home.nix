@@ -17,17 +17,17 @@
     dockerfile-language-server
     gopls
     helm-ls
-    # hyprls  # not in nixpkgs yet
+    hyprls
     nodePackages.intelephense
 		nil
-    # jinja-lsp  # not in nixpkgs
-    # prisma-language-server  # check availability
+    jinja-lsp
+    prisma-language-server
     rust-analyzer
     tailwindcss-language-server
     terraform-ls
     texlab
     tinymist
-    vue-language-server  # volar
+    vue-language-server
     yaml-language-server
     marksman
     clang-tools
