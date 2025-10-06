@@ -26,7 +26,7 @@ return {
 				javascript = formatters.lsp,
 				json = formatters.lsp,
 				lua = formatters.lsp,
-				nix = formatters.shell({ cmd = { "nixpkgs-fmt" } }),                       --idk
+				nix = formatters.lsp,
 				php = formatters.shell({ cmd = { "php-cs-fixer", "fix", "--rules=@PSR12" } }), --idk
 				prisma = formatters.lsp,
 				python = formatters.none_ls,

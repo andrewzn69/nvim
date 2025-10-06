@@ -53,6 +53,7 @@
     yamllint
     bibtex-tidy
     jq
+		nixfmt
   ];
 
   # create symlink to neovim config, TODO: do it with home-manager
