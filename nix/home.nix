@@ -13,13 +13,13 @@
     bash-language-server
     lua-language-server
     typescript-language-server
-    vscode-langservers-extracted  # css-lsp, html-lsp, json-lsp, eslint-lsp
+    vscode-langservers-extracted # css-lsp, html-lsp, json-lsp, eslint-lsp
     dockerfile-language-server
     gopls
     helm-ls
     hyprls
     nodePackages.intelephense
-		nil
+    nil
     jinja-lsp
     prisma-language-server
     rust-analyzer
@@ -53,7 +53,7 @@
     yamllint
     bibtex-tidy
     jq
-		nixfmt
+    nixfmt
   ];
 
   # create symlink to neovim config, TODO: do it with home-manager
