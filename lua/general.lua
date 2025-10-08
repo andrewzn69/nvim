@@ -141,3 +141,10 @@ vim.g.clipboard = {
 		['*'] = require('vim.ui.clipboard.osc52').paste('*'),
 	},
 }
+
+-- reset cursor to terminal default when leaving nvim
+vim.api.nvim_create_autocmd("VimLeave", {
+	callback = function()
+		vim.cmd([[set guicursor=a:hor20]])
+	end,
+})
