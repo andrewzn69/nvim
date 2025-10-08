@@ -12,6 +12,8 @@ keymap.set('n', '-', '<C-x>', { desc = 'Decrement number' })
 
 -- Delete a word backwards
 keymap.set('n', 'dw', 'vb"_d', { desc = 'Delete word backwards without yanking' })
+-- Delete a word backwards in insert mode
+vim.keymap.set('i', '<C-H>', '<C-W>', { noremap = true, silent = true })
 
 -- Select all
 keymap.set('n', '<C-a>', 'gg<S-v>G', { desc = 'Select all content' })
