@@ -113,7 +113,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
 vim.api.nvim_create_autocmd("BufWinEnter", {
 	pattern = "*",
 	callback = function()
-		if vim.bo.filetype == "neo-tree" or "toggleterm" then
+		if vim.bo.filetype == "neo-tree" or vim.bo.filetype == "toggleterm" then
 			vim.opt_local.cursorcolumn = false
 		end
 	end,

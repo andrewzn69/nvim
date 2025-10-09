@@ -11,6 +11,8 @@ if hostname == 'cheddar' or 'dev' then
 			vim.g.everforest_background = 'hard'
 			vim.g.everforest_better_performance = 1
 			vim.cmd.colorscheme('everforest')
+
+			vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#3A3A3A" })
 		end,
 	}
 elseif hostname == 'arch' then
