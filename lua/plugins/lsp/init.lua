@@ -108,24 +108,8 @@ return {
 			},
 		}
 
-		local server_names = {}
-		local server_configs = {}
-		for server_name, server_config in pairs(servers) do
-			table.insert(server_names, server_name)
-			server_configs[server_name] = server_config
-		end
-
-		local present_mason_lspconfig, mason_lspconfig = pcall(require, "mason-lspconfig")
-		if present_mason_lspconfig then
-			mason_lspconfig.setup({
-				ensure_installed = server_names,
-				automatic_installation = true,
-				automatic_enable = false, -- disables auto lspconfig setup
-			})
-		end
-
 		-- Manual setup per LSP server
-		for server, config in pairs(server_configs) do
+		for server, config in pairs(servers) do
 			local merged_config = vim.tbl_deep_extend("force", default_lsp_config, config or {})
 			if server == "rust_analyzer" then
 				local present_rust_tools, rust_tools = pcall(require, "rust-tools")
