@@ -12,7 +12,6 @@ return {
 		require("lsp_lines").setup()
 		require("spellwarn").setup()
 
-		local lspconfig = require("lspconfig")
 		local remaps = require("plugins.lsp.remaps")
 		local icons = require("utils.icons")
 
@@ -28,7 +27,8 @@ return {
 			end
 		end
 
-		local config = {
+		-- Configure diagnostics
+		vim.diagnostic.config({
 			virtual_text = false,
 			virtual_lines = false,
 			signs = {
@@ -38,9 +38,6 @@ return {
 					[vim.diagnostic.severity.HINT] = icons.diagnostics.hint,
 					[vim.diagnostic.severity.INFO] = icons.diagnostics.information,
 				},
-			},
-			flags = {
-				debounce_text_changes = 200,
 			},
 			update_in_insert = true,
 			underline = true,
@@ -54,9 +51,7 @@ return {
 				header = "",
 				prefix = "",
 			},
-		}
-		lspconfig.util.default_config = vim.tbl_deep_extend("force", lspconfig.util.default_config, config)
-		vim.diagnostic.config(config)
+		})
 
 		local border = {
 			border = "shadow",
@@ -108,17 +103,24 @@ return {
 			},
 		}
 
-		-- Manual setup per LSP server
+		-- Configure LSP servers using new vim.lsp.config API
 		for server, config in pairs(servers) do
 			local merged_config = vim.tbl_deep_extend("force", default_lsp_config, config or {})
+
 			if server == "rust_analyzer" then
 				local present_rust_tools, rust_tools = pcall(require, "rust-tools")
 				if present_rust_tools then
 					rust_tools.setup({ server = merged_config })
+				else
+					vim.lsp.config[server] = merged_config
 				end
 			else
-				lspconfig[server].setup(merged_config)
+				vim.lsp.config[server] = merged_config
 			end
 		end
+
+		-- Enable all configured LSP servers
+		local server_names = vim.tbl_keys(servers)
+		vim.lsp.enable(server_names)
 	end,
 }
