@@ -65,7 +65,7 @@ vim.opt.smartindent = true
 
 -- force spaces for yaml files (kubernetes, helm, etc.)
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "yaml", "yml" },
+	pattern = { "yaml", "yml", "helm" },
 	callback = function()
 		vim.opt_local.expandtab = true
 		vim.opt_local.tabstop = 2
