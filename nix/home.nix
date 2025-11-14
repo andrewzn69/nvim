@@ -47,7 +47,6 @@
 
     # linters and tools
     shellcheck
-    nodePackages.jsonlint
     markdownlint-cli
     tflint
     yamllint
