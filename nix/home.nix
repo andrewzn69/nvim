@@ -59,7 +59,7 @@
   system.userActivationScripts.neovimConfig = ''
     if [ ! -L /home/zemn/.config/nvim ]; then
       rm -rf /home/zemn/.config/nvim
-      ln -sf /home/zemn/.config/nixos/modules/development/neovim/config /home/zemn/.config/nvim
+      ln -sf /home/zemn/.config/nixos/modules/neovim/config /home/zemn/.config/nvim
     fi
   '';
 }
