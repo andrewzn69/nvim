@@ -15,7 +15,7 @@ if hostname == 'cheddar' or 'dev' then
 			vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#3A3A3A" })
 		end,
 	}
-elseif hostname == 'arch' then
+elseif hostname == 'desktop' then
 	return {
 		"ellisonleao/gruvbox.nvim",
 		lazy = false,
