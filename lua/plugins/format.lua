@@ -11,7 +11,7 @@ return {
 			},
 			formatter_by_ft = {
 				astro = formatters.lsp,
-				c = formatters.shell({ cmd = { "clang-format", "--style=file", "-i" } }), -- idk
+				c = formatters.lsp,
 				cmake = formatters.shell({ cmd = { "cmake-format", "-i" } }),           -- idk
 				cpp = formatters.shell({ cmd = { "clang-format", "--style=file", "-i" } }), -- idk
 				css = formatters.lsp,
