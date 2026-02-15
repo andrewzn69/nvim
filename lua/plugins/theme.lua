@@ -1,6 +1,6 @@
-local hostname = vim.loop.os_gethostname()
+local theme = vim.env.NVIM_THEME or 'default'
 
-if hostname == 'cheddar' or 'dev' then
+if theme == 'everforest' then
 	return {
 		'sainnhe/everforest',
 		lazy = false,
@@ -15,7 +15,7 @@ if hostname == 'cheddar' or 'dev' then
 			vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#3A3A3A" })
 		end,
 	}
-elseif hostname == 'desktop' then
+elseif theme == 'gruvbox' then
 	return {
 		"ellisonleao/gruvbox.nvim",
 		lazy = false,
@@ -64,7 +64,7 @@ elseif hostname == 'desktop' then
 			})
 		end,
 	}
-elseif hostname == 'archnb' then
+elseif theme == 'oxocarbon' then
 	return {
 		"nyoom-engineering/oxocarbon.nvim",
 		lazy = false,
@@ -72,7 +72,7 @@ elseif hostname == 'archnb' then
 			vim.cmd("colorscheme oxocarbon")
 		end
 	}
-elseif hostname == 'fedoranb' then
+elseif theme == 'nord' then
 	return {
 		"shaunsingh/nord.nvim",
 		lazy = false,
