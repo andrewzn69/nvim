@@ -81,6 +81,5 @@ elseif theme == 'nord' then
 		end
 	}
 else
-	vim.cmd("colorscheme default")
-	return nil
+	return {}
 end
