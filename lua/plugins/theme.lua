@@ -48,20 +48,23 @@ elseif theme == 'gruvbox' then
 					bright_yellow = "#D79921",
 				},
 				overrides = {
+					Normal = { bg = "NONE" },
+					NormalNC = { bg = "NONE" },
 					MiniIndentscopeSymbol = { fg = "#A89984" },
-					SignColumn = { bg = "#1D2022" },
+					SignColumn = { bg = "NONE" },
 					DiagnosticSignError = { bg = "NONE", fg = "#FB4934" },
 					DiagnosticSignWarn = { bg = "NONE", fg = "#FFA500" },
 					DiagnosticSignInfo = { bg = "NONE", fg = "#83A598" },
 					DiagnosticSignHint = { bg = "NONE", fg = "#98971A" },
+					NormalFloat = { bg = "#1D2022" },
+					FloatBorder = { bg = "#1D2022" },
+					WinBar = { bg = "NONE" },
+					WinBarNC = { bg = "NONE" },
 				},
 				dim_inactive = false,
-				transparent_mode = false,
+				-- transparent_mode = false,
 			})
 			vim.cmd("colorscheme gruvbox")
-			vim.api.nvim_set_hl(0, "NormalFloat", {
-				bg = "#1D2022"
-			})
 		end,
 	}
 elseif theme == 'oxocarbon' then

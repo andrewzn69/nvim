@@ -16,10 +16,55 @@ return {
 		local function current_time()
 			return os.date(' %H:%M')
 		end
+		local colors = {
+			green = "#98971A",
+			blue = "#458588",
+			orange = "#D79921",
+			red = "#CC241D",
+			purple = "#B16286",
+			fg = "#A89984",
+			bg_b = "#3E3E3E",
+			bg_c = "#2E2F30",
+			dark = "#1D2022",
+		}
+
+		local gruvbox_dark = {
+			normal = {
+				a = { bg = colors.green, fg = colors.dark, gui = "bold" },
+				b = { bg = colors.bg_b, fg = colors.fg },
+				c = { bg = colors.bg_c, fg = colors.fg },
+			},
+			insert = {
+				a = { bg = colors.blue, fg = colors.dark, gui = "bold" },
+				b = { bg = colors.bg_b, fg = colors.fg },
+				c = { bg = colors.bg_c, fg = colors.fg },
+			},
+			visual = {
+				a = { bg = colors.orange, fg = colors.dark, gui = "bold" },
+				b = { bg = colors.bg_b, fg = colors.fg },
+				c = { bg = colors.bg_c, fg = colors.fg },
+			},
+			replace = {
+				a = { bg = colors.red, fg = colors.dark, gui = "bold" },
+				b = { bg = colors.bg_b, fg = colors.fg },
+				c = { bg = colors.bg_c, fg = colors.fg },
+			},
+			command = {
+				a = { bg = colors.purple, fg = colors.dark, gui = "bold" },
+				b = { bg = colors.bg_b, fg = colors.fg },
+				c = { bg = colors.bg_c, fg = colors.fg },
+			},
+			inactive = {
+				a = { bg = colors.bg_b, fg = colors.fg },
+				b = { bg = colors.bg_b, fg = colors.fg },
+				c = { bg = colors.bg_c, fg = colors.fg },
+			},
+		}
+
 		local config = {
 			options = {
 				icons_enabled = true,
-				theme = 'auto',
+				theme = gruvbox_dark,
 				section_separators = { left = '', right = '' },
 				component_separators = { left = '', right = '' },
 				disabled_filetypes = { 'alpha', 'Avante', 'AvanteInput' }
@@ -72,7 +117,7 @@ return {
 						path = 0,
 						separator = " >",
 						padding = { left = 0, right = 0 },
-						color = { fg = vim.fn.synIDattr(vim.fn.hlID("NavicText"), "fg") },
+						color = { fg = vim.fn.synIDattr(vim.fn.hlID("NavicText"), "fg"), bg = 'NONE' },
 					},
 					{
 						"navic",
