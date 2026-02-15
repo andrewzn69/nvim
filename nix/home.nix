@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   programs.neovim = {
@@ -8,7 +8,7 @@
     vimAlias = true;
   };
 
-  environment.systemPackages = with pkgs; [
+  home.packages = with pkgs; [
     # language servers
     bash-language-server
     lua-language-server
@@ -55,11 +55,6 @@
     nixfmt
   ];
 
-  # create symlink to neovim config, TODO: do it with home-manager
-  system.userActivationScripts.neovimConfig = ''
-    if [ ! -L /home/zemn/.config/nvim ]; then
-      rm -rf /home/zemn/.config/nvim
-      ln -sf /home/zemn/.config/nixos/modules/neovim/config /home/zemn/.config/nvim
-    fi
-  '';
+  home.file.".config/nvim".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/nixos/modules/neovim/config";
 }
