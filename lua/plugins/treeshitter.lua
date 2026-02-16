@@ -5,7 +5,7 @@ return {
 	cmd = { "TSInstall", "TSBufEnable", "TSBufDisable" },
 	build = ":TSUpdate",
 	config = function()
-		local treesitter = require("nvim-treesitter.configs")
+		local treesitter = require("nvim-treesitter")
 
 		---@diagnostic disable-next-line
 		treesitter.setup({
