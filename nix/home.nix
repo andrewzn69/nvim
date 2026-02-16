@@ -45,6 +45,9 @@
     stylua
     yamlfmt
 
+    # treesitter
+    tree-sitter
+
     # linters and tools
     shellcheck
     markdownlint-cli

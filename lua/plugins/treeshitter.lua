@@ -7,122 +7,62 @@ return {
 	config = function()
 		local treesitter = require("nvim-treesitter")
 
-		---@diagnostic disable-next-line
-		treesitter.setup({
-			ensure_installed = {
-				"astro",
-				"bash",
-				"css",
-				"c_sharp",
-				"dockerfile",
-				"elixir",
-				"go",
-				"gotmpl",
-				"graphql",
-				"gitcommit",
-				"gitignore",
-				"git_config",
-				"git_rebase",
-				"hcl",
-				-- "helm",
-				"html",
-				"hyprlang",
-				"javascript",
-				"json",
-				"lua",
-				"markdown",
-				"markdown_inline",
-				"php",
-				"prisma",
-				"python",
-				"rasi",
-				"regex",
-				"regex",
-				"ruby",
-				"rust",
-				"scss",
-				"sql",
-				"terraform",
-				"tsx",
-				"typescript",
-				"vim",
-				"vue",
-				"yaml",
-				"yuck",
-			},
-			highlight = {
-				enable = true,
-			},
-			match = {
-				enable = true,
-			},
-			incremental_selection = {
-				enable = true,
-				keymaps = {
-					init_selection = "zi",
-					node_incremental = "zi",
-					scope_incremental = "zo",
-					node_decremental = "zd",
-				},
-			},
-			indent = {
-				enable = true,
-			},
-			-- textobjects = {
-			--   select = {
-			--     enable = true,
-			--     lookahead = true,
-			--     keymaps = {
-			--       ["af"] = "@function.outer",
-			--       ["if"] = "@function.inner",
-			--       ["ac"] = "@class.outer",
-			--       ["ic"] = "@class.inner",
-			--
-			--       -- xml attribute
-			--       ["ax"] = "@attribute.outer",
-			--       ["ix"] = "@attribute.inner",
-			--
-			--       -- json
-			--       ["ak"] = "@key.outer",
-			--       ["ik"] = "@key.inner",
-			--       ["av"] = "@value.outer",
-			--       ["iv"] = "@value.inner",
-			--     },
-			--   },
-			swap = {
-				enable = true,
-				swap_next = {
-					["<leader>rp"] = "@parameter.inner",
-				},
-				swap_previous = {
-					["<leader>rP"] = "@parameter.inner",
-				},
-			},
-			--   move = {
-			--     enable = true,
-			--     set_jumps = true, -- whether to set jumps in the jumplist
-			--     goto_next_start = {
-			--       ["]m"] = "@function.outer",
-			--       ["]]"] = "@class.outer",
-			--     },
-			--     goto_next_end = {
-			--       ["]M"] = "@function.outer",
-			--       ["]["] = "@class.outer",
-			--     },
-			--     goto_previous_start = {
-			--       ["[m"] = "@function.outer",
-			--       ["[["] = "@class.outer",
-			--     },
-			--     goto_previous_end = {
-			--       ["[M"] = "@function.outer",
-			--       ["[]"] = "@class.outer",
-			--     },
-			--   },
-			-- },
-			})
+		local parsers = {
+			"astro",
+			"bash",
+			"css",
+			"c_sharp",
+			"dockerfile",
+			"elixir",
+			"go",
+			"gotmpl",
+			"graphql",
+			"gitcommit",
+			"gitignore",
+			"git_config",
+			"git_rebase",
+			"hcl",
+			-- "helm",
+			"html",
+			"hyprlang",
+			"javascript",
+			"json",
+			"lua",
+			"markdown",
+			"markdown_inline",
+			"nix",
+			"php",
+			"prisma",
+			"python",
+			"rasi",
+			"regex",
+			"ruby",
+			"rust",
+			"scss",
+			"sql",
+			"terraform",
+			"tsx",
+			"typescript",
+			"vim",
+			"vue",
+			"yaml",
+			"yuck",
+		}
 
-		-- lsp semantic tokens default to priority 100; keep treeshitter below that
-		vim.highlight.priorities.treesitter = 90
+		-- v1 setup() only processes install_dir; call install explicitly
+		---@diagnostic disable-next-line
+		treesitter.setup({})
+		vim.schedule(function()
+			require("nvim-treesitter.install").install(parsers)
+		end)
+
+
+		-- v1 removed highlight management from the plugin; enable it explicitly per buffer
+		vim.api.nvim_create_autocmd("FileType", {
+			callback = function(args)
+				pcall(vim.treesitter.start, args.buf)
+			end,
+		})
 
 		vim.treesitter.language.register("gotmpl", { "gohtmltmpl", "gotexttmpl", "gotmpl", "helm" })
 
