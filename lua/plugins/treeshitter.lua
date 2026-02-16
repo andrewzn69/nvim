@@ -119,19 +119,9 @@ return {
 			--     },
 			--   },
 			-- },
-			textsubjects = {
-				enable = true,
-				keymaps = {
-					["."] = "textsubjects-smart",
-					[";"] = "textsubjects-container-outer",
-					["i;"] = "textsubjects-container-inner",
-				},
-			},
+			})
 
-		})
-
-		local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-		parser_config.gotmpl.used_by = { "gohtmltmpl", "gotexttmpl", "gotmpl", "helm" }
+		vim.treesitter.language.register("gotmpl", { "gohtmltmpl", "gotexttmpl", "gotmpl", "helm" })
 
 		vim.filetype.add({
 			pattern = { [".*/hypr/.*%.conf"] = "hyprlang" },
@@ -183,11 +173,6 @@ return {
 		-- r.map_virtual("[[", "Go to previous class (start)")
 		-- r.map_virtual("[]", "Go to previous class (end)")
 	end,
-  },
-  {
-    "RRethy/nvim-treesitter-textsubjects",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-    event = "BufReadPost",
   },
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
