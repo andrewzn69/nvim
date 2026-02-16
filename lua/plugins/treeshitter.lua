@@ -1,7 +1,7 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
 	dependencies = {
-		"RRethy/nvim-treesitter-textsubjects",
+		{ "RRethy/nvim-treesitter-textsubjects", lazy = true },
 		"nvim-treesitter/nvim-treesitter-textobjects",
 	},
 	event = "BufReadPost",
