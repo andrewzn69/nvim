@@ -121,6 +121,9 @@ return {
 			-- },
 			})
 
+		-- lsp semantic tokens default to priority 100; keep treeshitter below that
+		vim.highlight.priorities.treesitter = 90
+
 		vim.treesitter.language.register("gotmpl", { "gohtmltmpl", "gotexttmpl", "gotmpl", "helm" })
 
 		vim.filetype.add({
