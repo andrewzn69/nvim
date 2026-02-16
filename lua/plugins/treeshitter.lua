@@ -1,7 +1,7 @@
 return {
+  {
 	"nvim-treesitter/nvim-treesitter",
 	dependencies = {
-		{ "RRethy/nvim-treesitter-textsubjects", lazy = true },
 		"nvim-treesitter/nvim-treesitter-textobjects",
 	},
 	event = "BufReadPost",
@@ -186,4 +186,10 @@ return {
 		-- r.map_virtual("[[", "Go to previous class (start)")
 		-- r.map_virtual("[]", "Go to previous class (end)")
 	end,
+  },
+  {
+    "RRethy/nvim-treesitter-textsubjects",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    event = "BufReadPost",
+  },
 }
