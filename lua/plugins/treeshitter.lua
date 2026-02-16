@@ -1,8 +1,7 @@
 return {
   {
 	"nvim-treesitter/nvim-treesitter",
-	dependencies = {},
-	event = "BufReadPost",
+	lazy = false,
 	cmd = { "TSInstall", "TSBufEnable", "TSBufDisable" },
 	build = ":TSUpdate",
 	config = function()
