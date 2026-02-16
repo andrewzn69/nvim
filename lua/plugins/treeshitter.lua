@@ -1,9 +1,7 @@
 return {
   {
 	"nvim-treesitter/nvim-treesitter",
-	dependencies = {
-		"nvim-treesitter/nvim-treesitter-textobjects",
-	},
+	dependencies = {},
 	event = "BufReadPost",
 	cmd = { "TSInstall", "TSBufEnable", "TSBufDisable" },
 	build = ":TSUpdate",
@@ -189,6 +187,11 @@ return {
   },
   {
     "RRethy/nvim-treesitter-textsubjects",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    event = "BufReadPost",
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     event = "BufReadPost",
   },
