@@ -36,7 +36,7 @@ return {
 				typescript = formatters.lsp,
 				typescriptreact = formatters.lsp,
 				vue = formatters.lsp,
-				yaml = formatters.none_ls,
+				yaml = formatters.lsp,
 				markdown = formatters.none_ls,
 				bib = formatters.lsp,
 				tex = formatters.lsp,
