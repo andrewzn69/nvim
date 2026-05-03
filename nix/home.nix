@@ -10,6 +10,7 @@
 
   home.packages = with pkgs; [
     # language servers
+    astro-language-server
     bash-language-server
     lua-language-server
     typescript-language-server
