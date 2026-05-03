@@ -67,7 +67,7 @@ return {
 		end
 
 		local servers = {
-			astro = require("plugins.lsp.servers.astro")(on_attach),
+			astro = {},
 			bashls = require("plugins.lsp.servers.bashls")(on_attach),
 			biome = require("plugins.lsp.servers.biome")(on_attach),
 			clangd = {},
