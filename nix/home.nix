@@ -19,7 +19,7 @@
     gopls
     helm-ls
     hyprls
-    nodePackages.intelephense
+    intelephense
     nil
     jinja-lsp
     prisma-language-server
@@ -37,12 +37,12 @@
     black
     biome
     isort
-    nodePackages.prettier
+    prettier
     prettierd
     php83Packages.php-cs-fixer
     shellharden
     shfmt
-    nodePackages.stylelint
+    stylelint
     stylua
     yamlfmt
 
