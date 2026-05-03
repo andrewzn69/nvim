@@ -8,6 +8,7 @@
     vimAlias = true;
     withRuby = true;
     withPython3 = true;
+    sideloadInitLua = true;
   };
 
   home.packages = with pkgs; [
