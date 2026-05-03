@@ -10,7 +10,8 @@ return {
 				".local/share/nvim/lazy",
 			},
 			formatter_by_ft = {
-				astro = formatters.lsp,
+				-- astro = formatters.lsp,
+				biome = formatters.lsp,
 				c = formatters.lsp,
 				cmake = formatters.shell({ cmd = { "cmake-format", "-i" } }),           -- idk
 				cpp = formatters.shell({ cmd = { "clang-format", "--style=file", "-i" } }), -- idk
