@@ -18,7 +18,7 @@ return {
 		local presentCmpNvimLsp, cmp_lsp = pcall(require, "cmp_nvim_lsp")
 		local presentLspSignature, lsp_signature = pcall(require, "lsp_signature")
 
-		vim.lsp.set_log_level("error")
+		vim.lsp.log.set_level("error")
 
 		local function on_attach(client, bufnr)
 			remaps.set_default_on_buffer(client, bufnr)
@@ -53,11 +53,16 @@ return {
 			},
 		})
 
-		local border = {
-			border = "shadow",
-		}
-		vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.hover, border)
-		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, border)
+		vim.lsp.config("*", {
+			handlers = {
+				["textDocument/signatureHelp"] = function(err, result, ctx, config)
+					return vim.lsp.handlers.hover(err, result, ctx, vim.tbl_extend("force", config or {}, { border = "shadow" }))
+				end,
+				["textDocument/hover"] = function(err, result, ctx, config)
+					return vim.lsp.handlers.hover(err, result, ctx, vim.tbl_extend("force", config or {}, { border = "shadow" }))
+				end,
+			},
+		})
 
 		local capabilities
 		if presentCmpNvimLsp then
