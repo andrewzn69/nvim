@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   programs.neovim = {
@@ -6,6 +6,8 @@
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
+    withRuby = true;
+    withPython3 = true;
   };
 
   home.packages = with pkgs; [
@@ -59,6 +61,7 @@
     nixfmt
   ];
 
-  home.file.".config/nvim".source =
-    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/nixos/modules/neovim/config";
+  home.activation.nvimConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    ln -sfn ${config.home.homeDirectory}/.config/nixos/modules/neovim/config ${config.home.homeDirectory}/.config/nvim
+  '';
 }
