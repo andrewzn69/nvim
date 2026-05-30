@@ -79,6 +79,7 @@ return {
 			cssls = require("plugins.lsp.servers.cssls")(on_attach),
 			dockerls = {},
 			elixirls = {},
+			gopls = {},
 			html = {},
 			hyprls = {},
 			intelephense = require("plugins.lsp.servers.phpls")(on_attach),
