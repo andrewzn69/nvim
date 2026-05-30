@@ -90,7 +90,7 @@ return {
 			pyright = {}, -- require("plugins.lsp.servers.pyright")(on_attach),
 			rust_analyzer = {},
 			tailwindcss = {},
-			terraformls = {},
+			terraformls = require("plugins.lsp.servers.terraformls")(on_attach),
 			texlab = require("plugins.lsp.servers.texlab")(on_attach),
 			tflint = {},
 			tinymist = require("plugins.lsp.servers.tinymist")(on_attach),
