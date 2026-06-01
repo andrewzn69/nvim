@@ -23,7 +23,7 @@
     helm-ls
     hyprls
     intelephense
-    nil
+    nixd
     jinja-lsp
     prisma-language-server
     rust-analyzer
