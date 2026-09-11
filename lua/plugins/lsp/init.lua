@@ -10,7 +10,7 @@ return {
 	config = function()
 		require("neodev").setup({})
 		require("lsp_lines").setup()
-		require("spellwarn").setup()
+		require("spellwarn").setup({})
 
 		local remaps = require("plugins.lsp.remaps")
 		local icons = require("utils.icons")
