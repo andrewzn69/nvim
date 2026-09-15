@@ -17,20 +17,20 @@ return {
 			return os.date(' %H:%M')
 		end
 		local colors = {
-			green = "#98971A",
+			coral = "#B36656",
 			blue = "#458588",
 			orange = "#D79921",
 			red = "#CC241D",
 			purple = "#B16286",
-			fg = "#A89984",
-			bg_b = "#3E3E3E",
-			bg_c = "#2E2F30",
-			dark = "#1D2022",
+			fg = "#A49B81",
+			bg_b = "#2F3131",
+			bg_c = "#232628",
+			dark = "#171A1C",
 		}
 
 		local gruvbox_dark = {
 			normal = {
-				a = { bg = colors.green, fg = colors.dark, gui = "bold" },
+				a = { bg = colors.coral, fg = colors.dark, gui = "bold" },
 				b = { bg = colors.bg_b, fg = colors.fg },
 				c = { bg = colors.bg_c, fg = colors.fg },
 			},
