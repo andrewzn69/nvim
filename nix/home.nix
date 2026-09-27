@@ -25,6 +25,7 @@
     vscode-langservers-extracted # css-lsp, html-lsp, json-lsp, eslint-lsp
     dockerfile-language-server
     gopls
+    pyright
     helm-ls
     hyprls
     intelephense
