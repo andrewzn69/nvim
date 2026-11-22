@@ -48,7 +48,7 @@
     isort
     prettier
     prettierd
-    php83Packages.php-cs-fixer
+    phpPackages.php-cs-fixer
     shellharden
     shfmt
     stylelint
