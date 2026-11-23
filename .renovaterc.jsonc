@@ -50,7 +50,7 @@
 		{ "matchDepNames": ["gruvbox.nvim"], "overridePackageName": "ellisonleao/gruvbox.nvim" },
 		{ "matchDepNames": ["indent-blankline.nvim"], "overridePackageName": "lukas-reineke/indent-blankline.nvim" },
 		{ "matchDepNames": ["lazy.nvim"], "overridePackageName": "folke/lazy.nvim" },
-		{ "matchDepNames": ["live-server.nvim"], "overridePackageName": "aurum77/live-server.nvim" },
+		{ "matchDepNames": ["live-preview.nvim"], "overridePackageName": "brianhuster/live-preview.nvim" },
 		{ "matchDepNames": ["lsp_lines.nvim"], "overrideDatasource": "git-refs", "overridePackageName": "https://git.sr.ht/~whynothugo/lsp_lines.nvim" },
 		{ "matchDepNames": ["lspkind-nvim"], "overridePackageName": "onsails/lspkind-nvim" },
 		{ "matchDepNames": ["lualine.nvim"], "overridePackageName": "nvim-lualine/lualine.nvim" },
