@@ -39,7 +39,6 @@ return {
 				"python",
 				"rasi",
 				"regex",
-				"regex",
 				"ruby",
 				"rust",
 				"scss",
