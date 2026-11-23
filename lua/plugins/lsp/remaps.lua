@@ -1,16 +1,22 @@
 local r = require("utils.remaps")
 local vim = vim
 local X = {}
+-- bare lsp enable turns on every runtimepath config that fits a buffer's filetype
+local stopped_servers = {}
 
 local function LspToggle()
 	if vim.diagnostic.is_enabled() == false then
 		vim.diagnostic.enable()
 		vim.diagnostic.config({ virtual_text = true })
-		vim.cmd([[LspStart]])
+		vim.lsp.enable(vim.tbl_keys(stopped_servers))
 		print(" lsp starting...")
 	else
 		vim.diagnostic.enable(false)
-		vim.cmd([[LspStop]])
+		stopped_servers = {}
+		for _, client in ipairs(vim.lsp.get_clients()) do
+			stopped_servers[client.name] = true
+		end
+		vim.lsp.enable(vim.tbl_keys(stopped_servers), false)
 		print("lsp disabled")
 	end
 end
@@ -104,7 +110,7 @@ function X.set_default_on_buffer(client, bufnr)
 		end, "ignore warnings")
 	end
 
-	buf_set_keymap("n", "<leader>lI", ":LspInfo<CR>", "lsp info")
+	buf_set_keymap("n", "<leader>lI", ":checkhealth vim.lsp<CR>", "lsp info")
 	buf_set_keymap("n", "<leader>ls", vim.lsp.buf.signature_help, "show signature")
 	buf_set_keymap("n", "<leader>lE", vim.diagnostic.open_float, "show line diagnostics")
 	buf_set_keymap("n", "<leader>lt", function()
@@ -113,7 +119,7 @@ function X.set_default_on_buffer(client, bufnr)
 	buf_set_keymap("n", "<leader>ll", function()
 		if vim.diagnostic.is_enabled() == false then
 			vim.diagnostic.enable()
-			vim.cmd([[LspStart]])
+			vim.lsp.enable(vim.tbl_keys(stopped_servers))
 		end
 		require("lsp_lines").toggle()
 	end, "toggle lsp lines")
