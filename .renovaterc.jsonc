@@ -37,7 +37,6 @@
 		{ "matchDepNames": ["cmp-buffer"], "overridePackageName": "hrsh7th/cmp-buffer" },
 		{ "matchDepNames": ["cmp-nvim-lsp"], "overridePackageName": "hrsh7th/cmp-nvim-lsp" },
 		{ "matchDepNames": ["cmp-nvim-lsp-signature-help"], "overridePackageName": "hrsh7th/cmp-nvim-lsp-signature-help" },
-		{ "matchDepNames": ["cmp-nvim-lua"], "overridePackageName": "hrsh7th/cmp-nvim-lua" },
 		{ "matchDepNames": ["cmp-path"], "overridePackageName": "hrsh7th/cmp-path" },
 		{ "matchDepNames": ["cmp_luasnip"], "overridePackageName": "saadparwaiz1/cmp_luasnip" },
 		{ "matchDepNames": ["conform.nvim"], "overridePackageName": "stevearc/conform.nvim" },
