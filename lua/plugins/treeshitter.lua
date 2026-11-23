@@ -1,14 +1,13 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
 	dependencies = {
-		"RRethy/nvim-treesitter-textsubjects",
 		"nvim-treesitter/nvim-treesitter-textobjects",
 	},
 	event = "BufReadPost",
 	cmd = { "TSInstall", "TSBufEnable", "TSBufDisable" },
 	build = ":TSUpdate",
 	config = function()
-		local treesitter = require("nvim-treesitter.configs")
+		local treesitter = require("nvim-treesitter")
 
 		---@diagnostic disable-next-line
 		treesitter.setup({
@@ -53,12 +52,7 @@ return {
 				"yaml",
 				"yuck",
 			},
-			highlight = {
-				enable = true,
-			},
-			match = {
-				enable = true,
-			},
+			-- highlight, match, indent are neovim built-ins in 0.10+
 			incremental_selection = {
 				enable = true,
 				keymaps = {
@@ -67,9 +61,6 @@ return {
 					scope_incremental = "zo",
 					node_decremental = "zd",
 				},
-			},
-			indent = {
-				enable = true,
 			},
 			-- textobjects = {
 			--   select = {
@@ -122,19 +113,15 @@ return {
 			--     },
 			--   },
 			-- },
-			textsubjects = {
-				enable = true,
-				keymaps = {
-					["."] = "textsubjects-smart",
-					[";"] = "textsubjects-container-outer",
-					["i;"] = "textsubjects-container-inner",
-				},
-			},
-
 		})
 
-		local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-		parser_config.gotmpl.used_by = { "gohtmltmpl", "gotexttmpl", "gotmpl", "helm" }
+		local ok, parsers = pcall(require, "nvim-treesitter.parsers")
+		if ok and parsers.get_parser_configs then
+			local parser_config = parsers.get_parser_configs()
+			if parser_config.gotmpl then
+				parser_config.gotmpl.used_by = { "gohtmltmpl", "gotexttmpl", "gotmpl", "helm" }
+			end
+		end
 
 		vim.filetype.add({
 			pattern = { [".*/hypr/.*%.conf"] = "hyprlang" },

@@ -10,8 +10,9 @@ return {
 				".local/share/nvim/lazy",
 			},
 			formatter_by_ft = {
-				astro = formatters.lsp,
-				c = formatters.shell({ cmd = { "clang-format", "--style=file", "-i" } }), -- idk
+				-- astro = formatters.lsp,
+				biome = formatters.lsp,
+				c = formatters.lsp,
 				cmake = formatters.shell({ cmd = { "cmake-format", "-i" } }),           -- idk
 				cpp = formatters.shell({ cmd = { "clang-format", "--style=file", "-i" } }), -- idk
 				css = formatters.lsp,
@@ -26,7 +27,7 @@ return {
 				javascript = formatters.lsp,
 				json = formatters.lsp,
 				lua = formatters.lsp,
-				nix = formatters.shell({ cmd = { "nixpkgs-fmt" } }),                       --idk
+				nix = formatters.lsp,
 				php = formatters.shell({ cmd = { "php-cs-fixer", "fix", "--rules=@PSR12" } }), --idk
 				prisma = formatters.lsp,
 				python = formatters.none_ls,
@@ -36,7 +37,7 @@ return {
 				typescript = formatters.lsp,
 				typescriptreact = formatters.lsp,
 				vue = formatters.lsp,
-				yaml = formatters.none_ls,
+				yaml = formatters.lsp,
 				markdown = formatters.none_ls,
 				bib = formatters.lsp,
 				tex = formatters.lsp,

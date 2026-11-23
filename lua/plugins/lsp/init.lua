@@ -4,23 +4,21 @@ return {
 		"folke/neodev.nvim",
 		"b0o/schemastore.nvim",
 		"ravibrock/spellwarn.nvim",
-		"williamboman/mason-lspconfig.nvim",
 		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
 	},
 	event = { "BufReadPre", "BufNewFile" },
 	config = function()
 		require("neodev").setup({})
 		require("lsp_lines").setup()
-		require("spellwarn").setup()
+		require("spellwarn").setup({})
 
-		local lspconfig = require("lspconfig")
 		local remaps = require("plugins.lsp.remaps")
 		local icons = require("utils.icons")
 
 		local presentCmpNvimLsp, cmp_lsp = pcall(require, "cmp_nvim_lsp")
 		local presentLspSignature, lsp_signature = pcall(require, "lsp_signature")
 
-		vim.lsp.set_log_level("error")
+		vim.lsp.log.set_level("error")
 
 		local function on_attach(client, bufnr)
 			remaps.set_default_on_buffer(client, bufnr)
@@ -29,7 +27,8 @@ return {
 			end
 		end
 
-		local config = {
+		-- Configure diagnostics
+		vim.diagnostic.config({
 			virtual_text = false,
 			virtual_lines = false,
 			signs = {
@@ -39,9 +38,6 @@ return {
 					[vim.diagnostic.severity.HINT] = icons.diagnostics.hint,
 					[vim.diagnostic.severity.INFO] = icons.diagnostics.information,
 				},
-			},
-			flags = {
-				debounce_text_changes = 200,
 			},
 			update_in_insert = true,
 			underline = true,
@@ -55,15 +51,18 @@ return {
 				header = "",
 				prefix = "",
 			},
-		}
-		lspconfig.util.default_config = vim.tbl_deep_extend("force", lspconfig.util.default_config, config)
-		vim.diagnostic.config(config)
+		})
 
-		local border = {
-			border = "shadow",
-		}
-		vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.hover, border)
-		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, border)
+		vim.lsp.config("*", {
+			handlers = {
+				["textDocument/signatureHelp"] = function(err, result, ctx, config)
+					return vim.lsp.handlers.hover(err, result, ctx, vim.tbl_extend("force", config or {}, { border = "shadow" }))
+				end,
+				["textDocument/hover"] = function(err, result, ctx, config)
+					return vim.lsp.handlers.hover(err, result, ctx, vim.tbl_extend("force", config or {}, { border = "shadow" }))
+				end,
+			},
+		})
 
 		local capabilities
 		if presentCmpNvimLsp then
@@ -73,12 +72,14 @@ return {
 		end
 
 		local servers = {
-			astro = require("plugins.lsp.servers.astro")(on_attach),
+			astro = {},
 			bashls = require("plugins.lsp.servers.bashls")(on_attach),
 			biome = require("plugins.lsp.servers.biome")(on_attach),
+			clangd = {},
 			cssls = require("plugins.lsp.servers.cssls")(on_attach),
 			dockerls = {},
 			elixirls = {},
+			gopls = {},
 			html = {},
 			hyprls = {},
 			intelephense = require("plugins.lsp.servers.phpls")(on_attach),
@@ -89,12 +90,13 @@ return {
 			pyright = {}, -- require("plugins.lsp.servers.pyright")(on_attach),
 			rust_analyzer = {},
 			tailwindcss = {},
-			terraformls = {},
+			terraformls = require("plugins.lsp.servers.terraformls")(on_attach),
 			texlab = require("plugins.lsp.servers.texlab")(on_attach),
 			tflint = {},
 			tinymist = require("plugins.lsp.servers.tinymist")(on_attach),
 			yamlls = {},
 			omnisharp = require("plugins.lsp.servers.omnisharp")(on_attach),
+			nixd = {},
 			ts_ls = require("plugins.lsp.servers.ts_ls")(on_attach),
 			helm_ls = {},
 		}
@@ -108,33 +110,24 @@ return {
 			},
 		}
 
-		local server_names = {}
-		local server_configs = {}
-		for server_name, server_config in pairs(servers) do
-			table.insert(server_names, server_name)
-			server_configs[server_name] = server_config
-		end
-
-		local present_mason_lspconfig, mason_lspconfig = pcall(require, "mason-lspconfig")
-		if present_mason_lspconfig then
-			mason_lspconfig.setup({
-				ensure_installed = server_names,
-				automatic_installation = true,
-				automatic_enable = false, -- disables auto lspconfig setup
-			})
-		end
-
-		-- Manual setup per LSP server
-		for server, config in pairs(server_configs) do
+		-- Configure LSP servers using new vim.lsp.config API
+		for server, config in pairs(servers) do
 			local merged_config = vim.tbl_deep_extend("force", default_lsp_config, config or {})
+
 			if server == "rust_analyzer" then
 				local present_rust_tools, rust_tools = pcall(require, "rust-tools")
 				if present_rust_tools then
 					rust_tools.setup({ server = merged_config })
+				else
+					vim.lsp.config[server] = merged_config
 				end
 			else
-				lspconfig[server].setup(merged_config)
+				vim.lsp.config[server] = merged_config
 			end
 		end
+
+		-- Enable all configured LSP servers
+		local server_names = vim.tbl_keys(servers)
+		vim.lsp.enable(server_names)
 	end,
 }

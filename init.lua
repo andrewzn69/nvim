@@ -10,3 +10,5 @@ require('ui')
 vim.cmd([[set background=dark]])
 
 vim.o.clipboard = 'unnamedplus'
+
+vim.g.scrollbar_v2_notice = false

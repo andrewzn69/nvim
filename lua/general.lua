@@ -63,6 +63,17 @@ vim.opt.softtabstop = 2
 vim.opt.autoindent = true
 vim.opt.smartindent = true
 
+-- force spaces for yaml files (kubernetes, helm, etc.)
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "yaml", "yml", "helm" },
+	callback = function()
+		vim.opt_local.expandtab = true
+		vim.opt_local.tabstop = 2
+		vim.opt_local.shiftwidth = 2
+		vim.opt_local.softtabstop = 2
+	end,
+})
+
 -- turn off paste mode when leaving insert
 vim.api.nvim_create_autocmd("InsertLeave", {
 	pattern = '*',
@@ -113,7 +124,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
 vim.api.nvim_create_autocmd("BufWinEnter", {
 	pattern = "*",
 	callback = function()
-		if vim.bo.filetype == "neo-tree" or "toggleterm" then
+		if vim.bo.filetype == "neo-tree" or vim.bo.filetype == "toggleterm" then
 			vim.opt_local.cursorcolumn = false
 		end
 	end,
@@ -126,5 +137,25 @@ vim.api.nvim_create_autocmd("BufEnter", {
 		if vim.bo.filetype == "toggleterm" then
 			vim.opt_local.cursorline = false
 		end
+	end,
+})
+
+-- osc 52 clipboard for ssh (works with kitty terminal)
+vim.g.clipboard = {
+	name = 'OSC 52',
+	copy = {
+		['+'] = require('vim.ui.clipboard.osc52').copy('+'),
+		['*'] = require('vim.ui.clipboard.osc52').copy('*'),
+	},
+	paste = {
+		['+'] = require('vim.ui.clipboard.osc52').paste('+'),
+		['*'] = require('vim.ui.clipboard.osc52').paste('*'),
+	},
+}
+
+-- reset cursor to terminal default when leaving nvim
+vim.api.nvim_create_autocmd("VimLeave", {
+	callback = function()
+		vim.cmd([[set guicursor=a:hor20]])
 	end,
 })
