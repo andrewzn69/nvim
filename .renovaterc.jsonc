@@ -41,7 +41,6 @@
 		{ "matchDepNames": ["cmp-path"], "overridePackageName": "hrsh7th/cmp-path" },
 		{ "matchDepNames": ["cmp_luasnip"], "overridePackageName": "saadparwaiz1/cmp_luasnip" },
 		{ "matchDepNames": ["conform.nvim"], "overridePackageName": "stevearc/conform.nvim" },
-		{ "matchDepNames": ["copilot-cmp"], "overridePackageName": "zbirenbaum/copilot-cmp" },
 		{ "matchDepNames": ["diffview.nvim"], "overridePackageName": "sindrets/diffview.nvim" },
 		{ "matchDepNames": ["fidget.nvim"], "overridePackageName": "j-hui/fidget.nvim" },
 		{ "matchDepNames": ["friendly-snippets"], "overridePackageName": "rafamadriz/friendly-snippets" },
