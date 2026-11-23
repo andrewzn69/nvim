@@ -1,7 +1,5 @@
 {
-  config,
   pkgs,
-  lib,
   ...
 }:
 
@@ -68,7 +66,5 @@
     nixfmt
   ];
 
-  home.activation.nvimConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    ln -sfn ${config.home.homeDirectory}/.config/nixos/modules/neovim/config ${config.home.homeDirectory}/.config/nvim
-  '';
+  xdg.configFile."nvim".source = ./.;
 }
