@@ -34,58 +34,10 @@ end
 function X.set_default_on_buffer(client, bufnr)
 	local buf_set_keymap = generate_buf_keymapper(bufnr)
 
-	local function buf_set_option(o, v)
-		vim.api.nvim_set_option_value(o, v, { buf = bufnr })
-	end
-
 	local cap = client.server_capabilities
-
-	buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
-
-	if cap.definitionProvider then
-		buf_set_keymap("n", "<leader>lD", vim.lsp.buf.definition, "show definition")
-	end
 
 	if cap.declarationProvider then
 		buf_set_keymap("n", "<leader>ld", "<cmd>lua vim.lsp.buf.declaration()<CR>", "show declaration")
-	end
-
-	if cap.implementationProvider then
-		buf_set_keymap("n", "gi", vim.lsp.buf.implementation, "go to implementation")
-		buf_set_keymap("n", "gI", function()
-			require("telescope.builtin").lsp_implementations()
-		end, "search implementations")
-	end
-
-	if cap.referencesProvider then
-		buf_set_keymap("n", "<leader>/lr", function()
-			require("telescope.builtin").lsp_references()
-		end, "show references")
-	end
-
-	if cap.hoverProvider then
-		buf_set_keymap("n", "K", vim.lsp.buf.hover, "hover docs")
-	end
-
-	if cap.codeActionProvider then
-		buf_set_keymap({ "n", "v" }, "<leader>ra", function()
-			local line_count = vim.api.nvim_buf_line_count(bufnr)
-			local range = {
-				start = { line = 1, character = 1 },
-				["end"] = { line = line_count, character = 1 },
-			}
-			vim.lsp.buf.code_action({ range = range.range })
-		end, "code actions")
-	end
-
-	if cap.renameProvider then
-		buf_set_keymap("n", "<leader>rr", vim.lsp.buf.rename, "rename")
-	end
-
-	if cap.documentSymbolProvider then
-		buf_set_keymap("n", "<leader>lo", function()
-			require("telescope.builtin").lsp_document_symbols()
-		end, "document symbols")
 	end
 
 	local ft = vim.bo[bufnr].filetype
@@ -112,7 +64,7 @@ function X.set_default_on_buffer(client, bufnr)
 
 	buf_set_keymap("n", "<leader>lI", ":checkhealth vim.lsp<CR>", "lsp info")
 	buf_set_keymap("n", "<leader>ls", vim.lsp.buf.signature_help, "show signature")
-	buf_set_keymap("n", "<leader>lE", vim.diagnostic.open_float, "show line diagnostics")
+	buf_set_keymap("n", "<leader>lE", "<C-w>d", "show line diagnostics", { remap = true })
 	buf_set_keymap("n", "<leader>lt", function()
 		LspToggle()
 	end, "toggle lsp")
@@ -129,12 +81,7 @@ function X.set_default_on_buffer(client, bufnr)
 		{ "<leader>lI", group = "lsp Info", icon = { icon = "", hl = "Constant" } },
 		{ "<leader>ls", group = "show signature", icon = { icon = "󰅨", hl = "Constant" } },
 		{ "<leader>lE", group = "show line diagnostics", icon = { icon = "󰅰", hl = "Constant" } },
-		{ "<leader>lD", group = "show definition", icon = { icon = "", hl = "Constant" } },
-		{ "<leader>/lr", group = "show references", icon = { icon = "", hl = "Constant" } },
-		{ "<leader>ra", group = "code actions (range)", icon = { icon = "", hl = "Constant" } },
-		{ "<leader>rr", group = "rename", icon = { icon = "", hl = "Constant" } },
 		{ "<leader>li", group = "ignore warning", icon = { icon = "", hl = "Constant" } },
-		{ "<leader>lo", group = "document symbols", icon = { icon = "", hl = "Constant" } },
 		{ "<leader>ld", group = "show declaration", icon = { icon = "", hl = "Constant" } },
 		{ "<leader>lt", group = "toggle lsp", icon = { icon = "", hl = "Constant" } },
 	})
