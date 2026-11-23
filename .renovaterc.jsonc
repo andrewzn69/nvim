@@ -1,0 +1,94 @@
+{
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"extends": ["config:best-practices"],
+	"assignees": ["andrewzn69"],
+	// release notes expanded and config description left out
+	"prBodyTemplate": "{{{header}}}{{{table}}}{{{warnings}}}{{{notes}}}{{{replace '<details>' '<details open>' changelogs}}}{{{controls}}}{{{footer}}}",
+	"customManagers": [
+		{
+			"customType": "jsonata",
+			"description": "Update lazy.nvim plugin commits",
+			"fileFormat": "json",
+			"managerFilePatterns": ["/(^|/)lazy-lock\\.json$/"],
+			"datasourceTemplate": "github-digest",
+			"versioningTemplate": "exact",
+			"matchStrings": [
+				"$each($, function($lock, $name) { { 'depName': $name, 'currentValue': $lock.branch, 'currentDigest': $lock.commit}})"
+			]
+		}
+	],
+	"packageRules": [
+		{
+			"description": "Group plugin updates into one PR",
+			"matchManagers": ["custom.jsonata"],
+			"groupName": "neovim plugins"
+		},
+		{
+			"description": "Wait for new plugin commits to settle",
+			"matchManagers": ["custom.jsonata"],
+			"minimumReleaseAge": "7 days",
+			// plugins looked up through git-refs have no commit dates, so their updates don't wait
+			"minimumReleaseAgeBehaviour": "timestamp-optional",
+			"internalChecksFilter": "strict"
+		},
+		// lazy-lock.json doesn't name repos, so each plugin gets its repo here
+		{ "matchDepNames": ["LuaSnip"], "overridePackageName": "L3MON4D3/LuaSnip" },
+		{ "matchDepNames": ["alpha-nvim"], "overridePackageName": "goolord/alpha-nvim" },
+		{ "matchDepNames": ["cmp-buffer"], "overridePackageName": "hrsh7th/cmp-buffer" },
+		{ "matchDepNames": ["cmp-nvim-lsp"], "overridePackageName": "hrsh7th/cmp-nvim-lsp" },
+		{ "matchDepNames": ["cmp-nvim-lsp-signature-help"], "overridePackageName": "hrsh7th/cmp-nvim-lsp-signature-help" },
+		{ "matchDepNames": ["cmp-nvim-lua"], "overridePackageName": "hrsh7th/cmp-nvim-lua" },
+		{ "matchDepNames": ["cmp-path"], "overridePackageName": "hrsh7th/cmp-path" },
+		{ "matchDepNames": ["cmp_luasnip"], "overridePackageName": "saadparwaiz1/cmp_luasnip" },
+		{ "matchDepNames": ["copilot-cmp"], "overridePackageName": "zbirenbaum/copilot-cmp" },
+		{ "matchDepNames": ["diffview.nvim"], "overridePackageName": "sindrets/diffview.nvim" },
+		{ "matchDepNames": ["fidget.nvim"], "overridePackageName": "j-hui/fidget.nvim" },
+		{ "matchDepNames": ["format-on-save.nvim"], "overridePackageName": "elentok/format-on-save.nvim" },
+		{ "matchDepNames": ["friendly-snippets"], "overridePackageName": "rafamadriz/friendly-snippets" },
+		{ "matchDepNames": ["git-blame.nvim"], "overridePackageName": "f-person/git-blame.nvim" },
+		{ "matchDepNames": ["gitsigns.nvim"], "overridePackageName": "lewis6991/gitsigns.nvim" },
+		{ "matchDepNames": ["gruvbox.nvim"], "overridePackageName": "ellisonleao/gruvbox.nvim" },
+		{ "matchDepNames": ["indent-blankline.nvim"], "overridePackageName": "lukas-reineke/indent-blankline.nvim" },
+		{ "matchDepNames": ["lazy.nvim"], "overridePackageName": "folke/lazy.nvim" },
+		{ "matchDepNames": ["live-server.nvim"], "overridePackageName": "aurum77/live-server.nvim" },
+		{ "matchDepNames": ["lsp_lines.nvim"], "overrideDatasource": "git-refs", "overridePackageName": "https://git.sr.ht/~whynothugo/lsp_lines.nvim" },
+		{ "matchDepNames": ["lspkind-nvim"], "overridePackageName": "onsails/lspkind-nvim" },
+		{ "matchDepNames": ["lualine.nvim"], "overridePackageName": "nvim-lualine/lualine.nvim" },
+		{ "matchDepNames": ["markdown-preview.nvim"], "overridePackageName": "iamcco/markdown-preview.nvim" },
+		{ "matchDepNames": ["mini.indentscope"], "overridePackageName": "echasnovski/mini.indentscope" },
+		{ "matchDepNames": ["neo-tree.nvim"], "overridePackageName": "nvim-neo-tree/neo-tree.nvim" },
+		{ "matchDepNames": ["neodev.nvim"], "overridePackageName": "folke/neodev.nvim" },
+		{ "matchDepNames": ["nui.nvim"], "overridePackageName": "MunifTanjim/nui.nvim" },
+		{ "matchDepNames": ["nvim-autopairs"], "overridePackageName": "windwp/nvim-autopairs" },
+		{ "matchDepNames": ["nvim-cmp"], "overridePackageName": "hrsh7th/nvim-cmp" },
+		{ "matchDepNames": ["nvim-comment"], "overridePackageName": "terrortylor/nvim-comment" },
+		{ "matchDepNames": ["nvim-cursorline"], "overridePackageName": "yamatsum/nvim-cursorline" },
+		{ "matchDepNames": ["nvim-highlight-colors"], "overridePackageName": "brenoprata10/nvim-highlight-colors" },
+		{ "matchDepNames": ["nvim-lspconfig"], "overridePackageName": "neovim/nvim-lspconfig" },
+		{ "matchDepNames": ["nvim-navic"], "overridePackageName": "SmiteshP/nvim-navic" },
+		{ "matchDepNames": ["nvim-scrollbar"], "overridePackageName": "petertriho/nvim-scrollbar" },
+		{ "matchDepNames": ["nvim-surround"], "overridePackageName": "kylechui/nvim-surround" },
+		{ "matchDepNames": ["nvim-treesitter"], "overridePackageName": "nvim-treesitter/nvim-treesitter" },
+		{ "matchDepNames": ["nvim-treesitter-textobjects"], "overridePackageName": "nvim-treesitter/nvim-treesitter-textobjects" },
+		{ "matchDepNames": ["nvim-ts-autotag"], "overridePackageName": "windwp/nvim-ts-autotag" },
+		{ "matchDepNames": ["nvim-web-devicons"], "overridePackageName": "nvim-tree/nvim-web-devicons" },
+		{ "matchDepNames": ["plenary.nvim"], "overridePackageName": "nvim-lua/plenary.nvim" },
+		{ "matchDepNames": ["schemastore.nvim"], "overridePackageName": "b0o/schemastore.nvim" },
+		{ "matchDepNames": ["spellwarn.nvim"], "overridePackageName": "ravibrock/spellwarn.nvim" },
+		{ "matchDepNames": ["tailwindcss-colorizer-cmp.nvim"], "overridePackageName": "roobert/tailwindcss-colorizer-cmp.nvim" },
+		{ "matchDepNames": ["telescope-file-browser.nvim"], "overridePackageName": "nvim-telescope/telescope-file-browser.nvim" },
+		{ "matchDepNames": ["telescope-live-grep-args.nvim"], "overridePackageName": "nvim-telescope/telescope-live-grep-args.nvim" },
+		{ "matchDepNames": ["telescope-undo.nvim"], "overridePackageName": "debugloop/telescope-undo.nvim" },
+		{ "matchDepNames": ["telescope.nvim"], "overridePackageName": "nvim-telescope/telescope.nvim" },
+		{ "matchDepNames": ["toggleterm.nvim"], "overridePackageName": "akinsho/toggleterm.nvim" },
+		{ "matchDepNames": ["trouble.nvim"], "overridePackageName": "folke/trouble.nvim" },
+		{ "matchDepNames": ["vim-dadbod"], "overridePackageName": "tpope/vim-dadbod" },
+		{ "matchDepNames": ["vim-dadbod-completion"], "overridePackageName": "kristijanhusak/vim-dadbod-completion" },
+		{ "matchDepNames": ["vim-dadbod-ui"], "overridePackageName": "kristijanhusak/vim-dadbod-ui" },
+		{ "matchDepNames": ["vim-flog"], "overridePackageName": "rbong/vim-flog" },
+		{ "matchDepNames": ["vim-fugitive"], "overridePackageName": "tpope/vim-fugitive" },
+		{ "matchDepNames": ["vim-helm"], "overridePackageName": "towolf/vim-helm" },
+		{ "matchDepNames": ["which-key.nvim"], "overridePackageName": "folke/which-key.nvim" },
+		{ "matchDepNames": ["yuck.vim"], "overridePackageName": "elkowar/yuck.vim" }
+	]
+}
