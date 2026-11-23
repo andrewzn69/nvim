@@ -1,7 +1,24 @@
 {
+  config,
+  lib,
   pkgs,
   ...
 }:
+
+let
+  restorePlugins = pkgs.writeShellApplication {
+    name = "nvim-restore-plugins";
+    runtimeInputs = [
+      config.programs.neovim.finalPackage
+      pkgs.git
+    ];
+    runtimeEnv = {
+      LOCKFILE = "${./lua/plugins/lazy-lock.json}";
+      PROFILE_BIN = "${config.home.profileDirectory}/bin";
+    };
+    text = builtins.readFile ./scripts/restore-plugins.sh;
+  };
+in
 
 {
   programs.neovim = {
@@ -66,5 +83,8 @@
     nixfmt
   ];
 
-  xdg.configFile."nvim".source = ./.;
+  xdg.configFile."nvim" = {
+    source = ./.;
+    onChange = "run ${lib.getExe restorePlugins}";
+  };
 }
