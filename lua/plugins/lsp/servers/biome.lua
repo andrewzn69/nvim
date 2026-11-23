@@ -3,7 +3,6 @@ return function(on_attach)
 		on_attach = function(client, bufnr)
 			on_attach(client, bufnr)
 		end,
-		cmd = { 'biome', 'lsp-proxy' },
 		filetypes = {
 			'astro',
 			'css',
