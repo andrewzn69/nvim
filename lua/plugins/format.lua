@@ -46,7 +46,12 @@ return {
 				append_args = { "--rules=@PSR12" },
 			},
 		},
-		format_on_save = { timeout_ms = 1000 },
+		format_on_save = function(bufnr)
+			if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+				return
+			end
+			return { timeout_ms = 1000 }
+		end,
 	},
 	init = function()
 		vim.api.nvim_create_user_command("Format", function(args)
@@ -60,5 +65,18 @@ return {
 			end
 			require("conform").format({ async = true, range = range })
 		end, { range = true, desc = "format buffer or range" })
+
+		vim.api.nvim_create_user_command("FormatDisable", function(args)
+			if args.bang then
+				vim.b.disable_autoformat = true
+			else
+				vim.g.disable_autoformat = true
+			end
+		end, { bang = true, desc = "turn off format on save" })
+
+		vim.api.nvim_create_user_command("FormatEnable", function()
+			vim.b.disable_autoformat = false
+			vim.g.disable_autoformat = false
+		end, { desc = "turn on format on save" })
 	end,
 }
