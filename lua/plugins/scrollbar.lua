@@ -4,14 +4,16 @@ return {
 	config = function()
 		local scrollbar = require("scrollbar")
 		scrollbar.setup({
-			show_in_active_only = true,
-			handle = {
-				blend = 0,
-				text = " ",
-			},
 			marks = {
 				Cursor = { text = " " },
-			}
+			},
+			scrollbar = {
+				visibility = "active",
+				thumb = {
+					blend = 0,
+					text = " ",
+				},
+			},
 		})
 	end,
 }
