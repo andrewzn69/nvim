@@ -18,6 +18,7 @@ return {
 			html = lsp,
 			java = { "astyle" },
 			javascript = lsp,
+			javascriptreact = lsp,
 			json = lsp,
 			lua = lsp,
 			nix = lsp,
