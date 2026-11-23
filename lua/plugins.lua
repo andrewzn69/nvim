@@ -32,7 +32,6 @@ lazy.setup({
 		-- require("plugins.avante"),
 		require("plugins.cmp"),
 		require("plugins.colorizer"),
-		require("plugins.comment"),
 		-- require("plugins.copilot"),
 		require("plugins.cursorline"),
 		require("plugins.dadbod"),

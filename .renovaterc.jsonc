@@ -61,7 +61,6 @@
 		{ "matchDepNames": ["nui.nvim"], "overridePackageName": "MunifTanjim/nui.nvim" },
 		{ "matchDepNames": ["nvim-autopairs"], "overridePackageName": "windwp/nvim-autopairs" },
 		{ "matchDepNames": ["nvim-cmp"], "overridePackageName": "hrsh7th/nvim-cmp" },
-		{ "matchDepNames": ["nvim-comment"], "overridePackageName": "terrortylor/nvim-comment" },
 		{ "matchDepNames": ["nvim-cursorline"], "overridePackageName": "yamatsum/nvim-cursorline" },
 		{ "matchDepNames": ["nvim-highlight-colors"], "overridePackageName": "brenoprata10/nvim-highlight-colors" },
 		{ "matchDepNames": ["nvim-lspconfig"], "overridePackageName": "neovim/nvim-lspconfig" },
