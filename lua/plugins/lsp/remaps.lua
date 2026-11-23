@@ -47,13 +47,13 @@ function X.set_default_on_buffer(client, bufnr)
 	if cap.implementationProvider then
 		buf_set_keymap("n", "gi", vim.lsp.buf.implementation, "go to implementation")
 		buf_set_keymap("n", "gI", function()
-			require("fzf-lua").lsp_implementations()
+			require("telescope.builtin").lsp_implementations()
 		end, "search implementations")
 	end
 
 	if cap.referencesProvider then
 		buf_set_keymap("n", "<leader>/lr", function()
-			require("fzf-lua").lsp_references()
+			require("telescope.builtin").lsp_references()
 		end, "show references")
 	end
 
@@ -78,7 +78,7 @@ function X.set_default_on_buffer(client, bufnr)
 
 	if cap.documentSymbolProvider then
 		buf_set_keymap("n", "<leader>lo", function()
-			require("fzf-lua").lsp_document_symbols()
+			require("telescope.builtin").lsp_document_symbols()
 		end, "document symbols")
 	end
 
