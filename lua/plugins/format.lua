@@ -46,6 +46,6 @@ return {
 				append_args = { "--rules=@PSR12" },
 			},
 		},
-		format_on_save = { timeout_ms = 500 },
+		format_on_save = { timeout_ms = 1000 },
 	},
 }
