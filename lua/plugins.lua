@@ -67,7 +67,8 @@ lazy.setup({
 	dev = {
 		path = "~/.local/src",
 	},
-	lockfile = vim.fn.stdpath("config") .. "/lua/plugins/lazy-lock.json",
+	-- restore hook in hm-module.nix passes a writable copy, store copy is read only
+	lockfile = vim.env.LAZY_LOCKFILE or vim.fn.stdpath("config") .. "/lua/plugins/lazy-lock.json",
 	ui = {},
 	performance = {
 		cache = {
