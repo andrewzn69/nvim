@@ -1,14 +1,12 @@
 return {
 	"neovim/nvim-lspconfig",
 	dependencies = {
-		"folke/neodev.nvim",
 		"b0o/schemastore.nvim",
 		"ravibrock/spellwarn.nvim",
 		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
 	},
 	event = { "BufReadPre", "BufNewFile" },
 	config = function()
-		require("neodev").setup({})
 		require("lsp_lines").setup()
 		require("spellwarn").setup({})
 
