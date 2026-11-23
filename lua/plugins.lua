@@ -41,6 +41,7 @@ lazy.setup({
 		require("plugins.git"),
 		require("plugins.helm"),
 		require("plugins.indent"),
+		require("plugins.lazydev"),
 		require("plugins.live-preview"),
 		require("plugins.lsp"),
 		require("plugins.lualine"),
