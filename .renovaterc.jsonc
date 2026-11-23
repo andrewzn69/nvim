@@ -88,7 +88,6 @@
 		{ "matchDepNames": ["vim-flog"], "overridePackageName": "rbong/vim-flog" },
 		{ "matchDepNames": ["vim-fugitive"], "overridePackageName": "tpope/vim-fugitive" },
 		{ "matchDepNames": ["vim-helm"], "overridePackageName": "towolf/vim-helm" },
-		{ "matchDepNames": ["which-key.nvim"], "overridePackageName": "folke/which-key.nvim" },
-		{ "matchDepNames": ["yuck.vim"], "overridePackageName": "elkowar/yuck.vim" }
+		{ "matchDepNames": ["which-key.nvim"], "overridePackageName": "folke/which-key.nvim" }
 	]
 }

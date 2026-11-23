@@ -62,7 +62,6 @@ lazy.setup({
 		-- require("plugins.ts-errors"),
 		require("plugins.wakatime"),
 		require("plugins.which-key"),
-		require("plugins.yuck"),
 	},
 	dev = {
 		path = "~/.local/src",
