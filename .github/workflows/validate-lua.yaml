@@ -1,0 +1,122 @@
+---
+# yaml-language-server: $schema=https://www.schemastore.org/github-workflow.json
+name: Validate Lua
+
+on:
+  workflow_dispatch:
+    inputs:
+      lint:
+        description: Run luacheck
+        type: boolean
+        default: true
+      format:
+        description: Run StyLua
+        type: boolean
+        default: true
+      fix:
+        description: Apply StyLua fixes and upload them as a patch
+        type: boolean
+        default: false
+      lint-fail-on-findings:
+        description: Fail on luacheck warnings
+        type: boolean
+        default: true
+      format-fail-on-findings:
+        description: Fail on formatting differences in check mode
+        type: boolean
+        default: true
+  workflow_call:
+    inputs:
+      lint:
+        description: Run luacheck
+        type: boolean
+        default: true
+      format:
+        description: Run StyLua
+        type: boolean
+        default: true
+      fix:
+        description: Apply StyLua fixes and upload them as a patch
+        type: boolean
+        default: false
+      lint-fail-on-findings:
+        description: Fail on luacheck warnings
+        type: boolean
+        default: true
+      format-fail-on-findings:
+        description: Fail on formatting differences in check mode
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Lint and format
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      # nix keeps flakes off by default
+      NIX_CONFIG: experimental-features = nix-command flakes
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Install Nix
+        id: nix
+        env:
+          NIX_VERSION: 2.36.0
+          NIX_INSTALLER_SHA256: 8388dfd4d3c3a0c2dc79f764d453eafcc244255f47c93c1958f4775af22f0353
+        run: |
+          installer="$RUNNER_TEMP/nix-install"
+          curl -fsSL -o "$installer" "https://releases.nixos.org/nix/nix-$NIX_VERSION/install"
+          echo "$NIX_INSTALLER_SHA256  $installer" | sha256sum -c -
+          sh "$installer" --daemon --yes --no-channel-add
+          echo /nix/var/nix/profiles/default/bin >> "$GITHUB_PATH"
+
+      - name: Format
+        id: format
+        if: inputs.format
+        shell: nix develop -c bash -e {0}
+        env:
+          FIX: ${{ inputs.fix }}
+          FAIL_ON_FINDINGS: ${{ inputs.format-fail-on-findings }}
+        run: |
+          if [ "$FIX" = true ]; then
+            stylua .
+            git diff > "$RUNNER_TEMP/stylua.patch"
+            if [ -s "$RUNNER_TEMP/stylua.patch" ]; then
+              echo patch=true >> "$GITHUB_OUTPUT"
+            fi
+            exit 0
+          fi
+          status=0
+          stylua --check . || status=$?
+          if [ "$status" -eq 1 ] && [ "$FAIL_ON_FINDINGS" = false ]; then
+            exit 0
+          fi
+          exit "$status"
+
+      - name: Upload StyLua patch
+        if: steps.format.outputs.patch == 'true'
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          path: ${{ runner.temp }}/stylua.patch
+          archive: false
+
+      - name: Lint
+        if: ${{ !cancelled() && inputs.lint && steps.nix.outcome == 'success' }}
+        shell: nix develop -c bash -e {0}
+        env:
+          FAIL_ON_FINDINGS: ${{ inputs.lint-fail-on-findings }}
+        run: |
+          status=0
+          luacheck . || status=$?
+          # exit 1 means warnings, higher codes are syntax, file or config errors
+          if [ "$status" -eq 1 ] && [ "$FAIL_ON_FINDINGS" = false ]; then
+            exit 0
+          fi
+          exit "$status"
