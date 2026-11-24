@@ -1,19 +1,19 @@
 return function(on_attach)
-	return {
-		on_attach = function(client, bufnr)
-			on_attach(client, bufnr)
-		end,
-		cmd = { "bash-language-server", "start" },
-		cmd_env = {
-			GLOB_PATTERN = "*@(.sh|.inc|.bash|.command|.zsh)",
-		},
-		settings = {
-			bashIde = {
-				globPattern = vim.env.GLOB_PATTERN or "*@(.sh|.inc|.bash|.command|.zsh)",
-			},
-		},
-		filetypes = { "sh", "zsh" },
-		root_dir = vim.fs.root(0, {'.git'}),
-		single_file_support = true,
-	}
+  return {
+    on_attach = function(client, bufnr)
+      on_attach(client, bufnr)
+    end,
+    cmd = { 'bash-language-server', 'start' },
+    cmd_env = {
+      GLOB_PATTERN = '*@(.sh|.inc|.bash|.command|.zsh)',
+    },
+    settings = {
+      bashIde = {
+        globPattern = vim.env.GLOB_PATTERN or '*@(.sh|.inc|.bash|.command|.zsh)',
+      },
+    },
+    filetypes = { 'sh', 'zsh' },
+    root_dir = vim.fs.root(0, { '.git' }),
+    single_file_support = true,
+  }
 end

@@ -1,90 +1,90 @@
-local r = require("utils.remaps")
+local r = require('utils.remaps')
 local vim = vim
 local X = {}
 -- bare lsp enable turns on every runtimepath config that fits a buffer's filetype
 local stopped_servers = {}
 
 local function LspToggle()
-	if vim.diagnostic.is_enabled() == false then
-		vim.diagnostic.enable()
-		vim.diagnostic.config({ virtual_text = true })
-		vim.lsp.enable(vim.tbl_keys(stopped_servers))
-		print(" lsp starting...")
-	else
-		vim.diagnostic.enable(false)
-		stopped_servers = {}
-		for _, client in ipairs(vim.lsp.get_clients()) do
-			stopped_servers[client.name] = true
-		end
-		vim.lsp.enable(vim.tbl_keys(stopped_servers), false)
-		print("lsp disabled")
-	end
+  if vim.diagnostic.is_enabled() == false then
+    vim.diagnostic.enable()
+    vim.diagnostic.config({ virtual_text = true })
+    vim.lsp.enable(vim.tbl_keys(stopped_servers))
+    print(' lsp starting...')
+  else
+    vim.diagnostic.enable(false)
+    stopped_servers = {}
+    for _, client in ipairs(vim.lsp.get_clients()) do
+      stopped_servers[client.name] = true
+    end
+    vim.lsp.enable(vim.tbl_keys(stopped_servers), false)
+    print('lsp disabled')
+  end
 end
 
 local function generate_buf_keymapper(bufnr)
-	return function(type, input, output, description, extraOptions)
-		local options = { buffer = bufnr }
-		if extraOptions ~= nil then
-			options = vim.tbl_deep_extend("force", options, extraOptions)
-		end
-		r.noremap(type, input, output, description, options)
-	end
+  return function(type, input, output, description, extraOptions)
+    local options = { buffer = bufnr }
+    if extraOptions ~= nil then
+      options = vim.tbl_deep_extend('force', options, extraOptions)
+    end
+    r.noremap(type, input, output, description, options)
+  end
 end
 
 function X.set_default_on_buffer(client, bufnr)
-	local buf_set_keymap = generate_buf_keymapper(bufnr)
+  local buf_set_keymap = generate_buf_keymapper(bufnr)
 
-	local cap = client.server_capabilities
+  local cap = client.server_capabilities
 
-	if cap.declarationProvider then
-		buf_set_keymap("n", "<leader>ld", "<cmd>lua vim.lsp.buf.declaration()<CR>", "show declaration")
-	end
+  if cap.declarationProvider then
+    buf_set_keymap('n', '<leader>ld', '<cmd>lua vim.lsp.buf.declaration()<CR>', 'show declaration')
+  end
 
-	local ft = vim.bo[bufnr].filetype
-	if ft == "sh" or ft == "lua" then
-		buf_set_keymap("n", "<leader>li", function()
-			local row, _ = unpack(vim.api.nvim_win_get_cursor(0))
-			local msgs = vim.diagnostic.get(bufnr)
-			local last, result = unpack({ "error", "" })
-			if ft == "lua" then
-				result = "---@diagnostic disable-next-line"
-			else
-				for _, d in pairs(msgs) do
-					if d.lnum == (row - 1) and d.code ~= last then
-						result = (result ~= "") and result .. "," .. d.code or "#shellcheck disable=" .. d.code
-						last = tostring(d.code)
-					end
-				end
-			end
-			if result ~= "" then
-				vim.api.nvim_buf_set_lines(0, row - 1, row - 1, false, { result })
-			end
-		end, "ignore warnings")
-	end
+  local ft = vim.bo[bufnr].filetype
+  if ft == 'sh' or ft == 'lua' then
+    buf_set_keymap('n', '<leader>li', function()
+      local row, _ = unpack(vim.api.nvim_win_get_cursor(0))
+      local msgs = vim.diagnostic.get(bufnr)
+      local last, result = unpack({ 'error', '' })
+      if ft == 'lua' then
+        result = '---@diagnostic disable-next-line'
+      else
+        for _, d in pairs(msgs) do
+          if d.lnum == (row - 1) and d.code ~= last then
+            result = (result ~= '') and result .. ',' .. d.code or '#shellcheck disable=' .. d.code
+            last = tostring(d.code)
+          end
+        end
+      end
+      if result ~= '' then
+        vim.api.nvim_buf_set_lines(0, row - 1, row - 1, false, { result })
+      end
+    end, 'ignore warnings')
+  end
 
-	buf_set_keymap("n", "<leader>lI", ":checkhealth vim.lsp<CR>", "lsp info")
-	buf_set_keymap("n", "<leader>ls", vim.lsp.buf.signature_help, "show signature")
-	buf_set_keymap("n", "<leader>lE", "<C-w>d", "show line diagnostics", { remap = true })
-	buf_set_keymap("n", "<leader>lt", function()
-		LspToggle()
-	end, "toggle lsp")
-	buf_set_keymap("n", "<leader>ll", function()
-		if vim.diagnostic.is_enabled() == false then
-			vim.diagnostic.enable()
-			vim.lsp.enable(vim.tbl_keys(stopped_servers))
-		end
-		require("lsp_lines").toggle()
-	end, "toggle lsp lines")
-	r.map_virtual({
-		{ "<leader>l", group = "lsp", icon = { icon = "", hl = "Constant" } },
-		{ "<leader>ll", group = "lsp lines", icon = { icon = "󱞽", hl = "Constant" } },
-		{ "<leader>lI", group = "lsp Info", icon = { icon = "", hl = "Constant" } },
-		{ "<leader>ls", group = "show signature", icon = { icon = "󰅨", hl = "Constant" } },
-		{ "<leader>lE", group = "show line diagnostics", icon = { icon = "󰅰", hl = "Constant" } },
-		{ "<leader>li", group = "ignore warning", icon = { icon = "", hl = "Constant" } },
-		{ "<leader>ld", group = "show declaration", icon = { icon = "", hl = "Constant" } },
-		{ "<leader>lt", group = "toggle lsp", icon = { icon = "", hl = "Constant" } },
-	})
+  buf_set_keymap('n', '<leader>lI', ':checkhealth vim.lsp<CR>', 'lsp info')
+  buf_set_keymap('n', '<leader>ls', vim.lsp.buf.signature_help, 'show signature')
+  buf_set_keymap('n', '<leader>lE', '<C-w>d', 'show line diagnostics', { remap = true })
+  buf_set_keymap('n', '<leader>lt', function()
+    LspToggle()
+  end, 'toggle lsp')
+  buf_set_keymap('n', '<leader>ll', function()
+    if vim.diagnostic.is_enabled() == false then
+      vim.diagnostic.enable()
+      vim.lsp.enable(vim.tbl_keys(stopped_servers))
+    end
+    require('lsp_lines').toggle()
+  end, 'toggle lsp lines')
+  r.map_virtual({
+    { '<leader>l', group = 'lsp', icon = { icon = '', hl = 'Constant' } },
+    { '<leader>ll', group = 'lsp lines', icon = { icon = '󱞽', hl = 'Constant' } },
+    { '<leader>lI', group = 'lsp Info', icon = { icon = '', hl = 'Constant' } },
+    { '<leader>ls', group = 'show signature', icon = { icon = '󰅨', hl = 'Constant' } },
+    { '<leader>lE', group = 'show line diagnostics', icon = { icon = '󰅰', hl = 'Constant' } },
+    { '<leader>li', group = 'ignore warning', icon = { icon = '', hl = 'Constant' } },
+    { '<leader>ld', group = 'show declaration', icon = { icon = '', hl = 'Constant' } },
+    { '<leader>lt', group = 'toggle lsp', icon = { icon = '', hl = 'Constant' } },
+  })
 end
 
 return X
