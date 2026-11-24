@@ -53,10 +53,7 @@ local function get_best_window_filename(tabpage, window)
   if filename == nil then
     local wins = vim.api.nvim_tabpage_list_wins(tabpage)
     if #wins > 1 then
-      for _, win in ipairs(wins) do
-        filename = extract_filename(win)
-        break
-      end
+      filename = extract_filename(wins[1])
     end
   end
   if filename == nil then
