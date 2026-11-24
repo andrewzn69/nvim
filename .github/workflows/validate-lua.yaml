@@ -115,7 +115,6 @@ jobs:
         run: |
           status=0
           luacheck . || status=$?
-          # exit 1 means warnings, higher codes are syntax, file or config errors
           if [ "$status" -eq 1 ] && [ "$FAIL_ON_FINDINGS" = false ]; then
             exit 0
           fi
