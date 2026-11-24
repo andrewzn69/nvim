@@ -4,6 +4,7 @@
 	"assignees": ["andrewzn69"],
 	// release notes expanded and config description left out
 	"prBodyTemplate": "{{{header}}}{{{table}}}{{{warnings}}}{{{notes}}}{{{replace '<details>' '<details open>' changelogs}}}{{{controls}}}{{{footer}}}",
+	"nix": { "enabled": true },
 	"customManagers": [
 		{
 			"customType": "jsonata",
@@ -45,6 +46,12 @@
 			"prBodyNotes": [
 				"Update `NIX_TARBALL_SHA256` to https://releases.nixos.org/nix/nix-{{{newVersion}}}/nix-{{{newVersion}}}-x86_64-linux.tar.xz.sha256 before merging."
 			]
+		},
+		{
+			"description": "Update flake.lock only in lock file maintenance PRs",
+			"matchManagers": ["nix"],
+			"matchUpdateTypes": ["digest"],
+			"enabled": false
 		},
 		// lazy-lock.json doesn't name repos, so each plugin gets its repo here
 		{ "matchDepNames": ["LuaSnip"], "overridePackageName": "L3MON4D3/LuaSnip" },

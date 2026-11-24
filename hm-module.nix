@@ -1,3 +1,4 @@
+{ nixpkgs }:
 {
   config,
   lib,
@@ -6,6 +7,7 @@
 }:
 
 let
+  flakePkgs = nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
   restorePlugins = pkgs.writeShellApplication {
     name = "nvim-restore-plugins";
     runtimeInputs = [
@@ -67,7 +69,7 @@ in
     shellharden
     shfmt
     stylelint
-    stylua
+    flakePkgs.stylua
     yamlfmt
 
     # treesitter

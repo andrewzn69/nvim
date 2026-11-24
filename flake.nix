@@ -16,7 +16,7 @@
       forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f nixpkgs.legacyPackages.${system});
     in
     {
-      homeModules.default = ./hm-module.nix;
+      homeModules.default = nixpkgs.lib.modules.importApply ./hm-module.nix { inherit nixpkgs; };
 
       devShells = forAllSystems (pkgs: {
         default = pkgs.mkShell {
