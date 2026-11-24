@@ -80,9 +80,22 @@ jobs:
           ./install --daemon --yes --no-channel-add
           echo /nix/var/nix/profiles/default/bin >> "$GITHUB_PATH"
 
+      - name: Lint
+        if: inputs.lint
+        shell: nix develop --no-update-lock-file -c bash -e {0}
+        env:
+          FAIL_ON_FINDINGS: ${{ inputs.lint-fail-on-findings }}
+        run: |
+          status=0
+          luacheck . || status=$?
+          if [ "$status" -eq 1 ] && [ "$FAIL_ON_FINDINGS" = false ]; then
+            exit 0
+          fi
+          exit "$status"
+
       - name: Format
         id: format
-        if: inputs.format
+        if: ${{ !cancelled() && inputs.format && steps.nix.outcome == 'success' }}
         shell: nix develop --no-update-lock-file -c bash -e {0}
         env:
           FIX: ${{ inputs.fix }}
@@ -104,22 +117,9 @@ jobs:
           exit "$status"
 
       - name: Upload StyLua patch
-        if: steps.format.outputs.patch == 'true'
+        if: ${{ !cancelled() && steps.format.outputs.patch == 'true' }}
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           path: ${{ runner.temp }}/stylua.patch
           archive: false
           overwrite: true
-
-      - name: Lint
-        if: ${{ !cancelled() && inputs.lint && steps.nix.outcome == 'success' }}
-        shell: nix develop --no-update-lock-file -c bash -e {0}
-        env:
-          FAIL_ON_FINDINGS: ${{ inputs.lint-fail-on-findings }}
-        run: |
-          status=0
-          luacheck . || status=$?
-          if [ "$status" -eq 1 ] && [ "$FAIL_ON_FINDINGS" = false ]; then
-            exit 0
-          fi
-          exit "$status"
