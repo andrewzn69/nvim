@@ -80,7 +80,7 @@ jobs:
       - name: Format
         id: format
         if: inputs.format
-        shell: nix develop -c bash -e {0}
+        shell: nix develop --no-update-lock-file -c bash -e {0}
         env:
           FIX: ${{ inputs.fix }}
           FAIL_ON_FINDINGS: ${{ inputs.format-fail-on-findings }}
@@ -109,7 +109,7 @@ jobs:
 
       - name: Lint
         if: ${{ !cancelled() && inputs.lint && steps.nix.outcome == 'success' }}
-        shell: nix develop -c bash -e {0}
+        shell: nix develop --no-update-lock-file -c bash -e {0}
         env:
           FAIL_ON_FINDINGS: ${{ inputs.lint-fail-on-findings }}
         run: |
