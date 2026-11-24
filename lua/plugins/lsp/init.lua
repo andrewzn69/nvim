@@ -127,10 +127,10 @@ return {
         if present_rust_tools then
           rust_tools.setup({ server = merged_config })
         else
-          vim.lsp.config[server] = merged_config
+          vim.lsp.config(server, merged_config)
         end
       else
-        vim.lsp.config[server] = merged_config
+        vim.lsp.config(server, merged_config)
       end
     end
 
