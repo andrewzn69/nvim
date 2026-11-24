@@ -99,7 +99,6 @@
 		{ "matchDepNames": ["telescope-live-grep-args.nvim"], "overridePackageName": "nvim-telescope/telescope-live-grep-args.nvim" },
 		{ "matchDepNames": ["telescope-undo.nvim"], "overridePackageName": "debugloop/telescope-undo.nvim" },
 		{ "matchDepNames": ["telescope.nvim"], "overridePackageName": "nvim-telescope/telescope.nvim" },
-		{ "matchDepNames": ["toggleterm.nvim"], "overridePackageName": "akinsho/toggleterm.nvim" },
 		{ "matchDepNames": ["trouble.nvim"], "overridePackageName": "folke/trouble.nvim" },
 		{ "matchDepNames": ["vim-dadbod"], "overridePackageName": "tpope/vim-dadbod" },
 		{ "matchDepNames": ["vim-dadbod-completion"], "overridePackageName": "kristijanhusak/vim-dadbod-completion" },
