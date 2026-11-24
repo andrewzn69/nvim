@@ -4,6 +4,7 @@
 	"assignees": ["andrewzn69"],
 	// release notes expanded and config description left out
 	"prBodyTemplate": "{{{header}}}{{{table}}}{{{warnings}}}{{{notes}}}{{{replace '<details>' '<details open>' changelogs}}}{{{controls}}}{{{footer}}}",
+	"nix": { "enabled": true },
 	"customManagers": [
 		{
 			"customType": "jsonata",
