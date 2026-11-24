@@ -1,3 +1,3 @@
 return function(capabilities)
-	capabilities.textDocument.completion.completionItem.snippetSupport = true
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
 end

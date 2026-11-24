@@ -1,7 +1,7 @@
 local keymap = vim.keymap
 
 -- space as leader key
-vim.g.mapleader = " "
+vim.g.mapleader = ' '
 
 -- Window navigation using <Space> + w + h/j/k/l
 vim.keymap.set('n', '<Leader>wh', '<C-w>h', { desc = 'Move to left window' })
