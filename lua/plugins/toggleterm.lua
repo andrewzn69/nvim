@@ -11,7 +11,7 @@ return {
       width = 50,
       winblend = 3,
     },
-    on_open = function(term)
+    on_open = function()
       vim.cmd('wincmd p')
       vim.cmd('stopinsert')
     end,
