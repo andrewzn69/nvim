@@ -54,7 +54,6 @@ lazy.setup({
     require('plugins.surround'),
     require('plugins.telescope'),
     require('plugins.theme'),
-    require('plugins.toggleterm'),
     require('plugins.treeshitter'),
     require('plugins.trouble'),
     require('plugins.ts-autotag'),
