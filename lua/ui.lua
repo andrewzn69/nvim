@@ -1,3 +1,5 @@
+local M = {}
+
 -- disable startup message
 vim.opt.shortmess:append('sI')
 
@@ -85,7 +87,7 @@ local function getname(tabpage)
   return filename
 end
 
-function Tabline()
+function M.tabline()
   local tl = {}
   local current = vim.api.nvim_get_current_tabpage()
   for i, tabpage in ipairs(vim.api.nvim_list_tabpages()) do
@@ -100,7 +102,7 @@ function Tabline()
   return table.concat(tl, '')
 end
 
-vim.opt.tabline = [[%!v:lua.Tabline()]]
+vim.opt.tabline = [[%!v:lua.require'ui'.tabline()]]
 
 vim.opt.winblend = 0
 vim.opt.pumblend = 5
@@ -112,3 +114,5 @@ vim.cmd([[
  au TextYankPost * silent! lua vim.highlight.on_yank({higroup="Visual", timeout=100})
  augroup END
 ]])
+
+return M
