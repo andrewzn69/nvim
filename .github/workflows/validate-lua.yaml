@@ -95,7 +95,7 @@ jobs:
 
       - name: Format
         id: format
-        if: ${{ !cancelled() && inputs.format && steps.nix.outcome == 'success' }}
+        if: ${{ !cancelled() && (inputs.format || inputs.fix) && steps.nix.outcome == 'success' }}
         shell: nix develop --no-update-lock-file -c bash -e {0}
         env:
           FIX: ${{ inputs.fix }}
