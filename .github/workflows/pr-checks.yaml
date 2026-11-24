@@ -1,0 +1,27 @@
+---
+# yaml-language-server: $schema=https://www.schemastore.org/github-workflow.json
+name: PR Checks
+
+on:
+  pull_request:
+    branches:
+      - master
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  validate-lua:
+    name: Validate Lua
+    permissions:
+      contents: read
+    uses: ./.github/workflows/validate-lua.yaml
+    with:
+      lint: true
+      format: true
+      fix: false
+      lint-fail-on-findings: true
+      format-fail-on-findings: true
