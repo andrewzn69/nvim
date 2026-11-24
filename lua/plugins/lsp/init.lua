@@ -97,6 +97,7 @@ return {
       marksman = {},
       pyright = {}, -- require("plugins.lsp.servers.pyright")(on_attach),
       rust_analyzer = {},
+      stylua = {},
       tailwindcss = {},
       terraformls = require('plugins.lsp.servers.terraformls')(on_attach),
       texlab = require('plugins.lsp.servers.texlab')(on_attach),
