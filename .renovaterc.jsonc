@@ -15,6 +15,14 @@
 			"matchStrings": [
 				"$each($, function($lock, $name) { { 'depName': $name, 'currentValue': $lock.branch, 'currentDigest': $lock.commit}})"
 			]
+		},
+		{
+			"customType": "regex",
+			"description": "Update Nix installed in CI workflows",
+			"managerFilePatterns": ["/^\\.github/workflows/[^/]+\\.ya?ml$/"],
+			"matchStrings": ["NIX_VERSION: (?<currentValue>\\S+)"],
+			"depNameTemplate": "NixOS/nix",
+			"datasourceTemplate": "github-tags"
 		}
 	],
 	"packageRules": [
@@ -30,6 +38,13 @@
 			// plugins looked up through git-refs have no commit dates, so their updates don't wait
 			"minimumReleaseAgeBehaviour": "timestamp-optional",
 			"internalChecksFilter": "strict"
+		},
+		{
+			"description": "Remind to update Nix tarball hash",
+			"matchDepNames": ["NixOS/nix"],
+			"prBodyNotes": [
+				"Update `NIX_TARBALL_SHA256` to https://releases.nixos.org/nix/nix-{{{newVersion}}}/nix-{{{newVersion}}}-x86_64-linux.tar.xz.sha256 before merging."
+			]
 		},
 		// lazy-lock.json doesn't name repos, so each plugin gets its repo here
 		{ "matchDepNames": ["LuaSnip"], "overridePackageName": "L3MON4D3/LuaSnip" },
