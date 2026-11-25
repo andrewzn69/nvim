@@ -104,7 +104,6 @@ return {
       tflint = {},
       tinymist = require('plugins.lsp.servers.tinymist')(on_attach),
       yamlls = {},
-      omnisharp = require('plugins.lsp.servers.omnisharp')(on_attach),
       nixd = {},
       ts_ls = require('plugins.lsp.servers.ts_ls')(on_attach),
       helm_ls = {},
