@@ -11,7 +11,6 @@ return {
       cmake = { 'cmake_format' },
       cpp = { 'clang-format' },
       css = lsp,
-      cs = lsp,
       elixir = lsp,
       go = lsp,
       helm = lsp,
