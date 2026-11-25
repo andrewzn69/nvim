@@ -38,9 +38,10 @@ in
     astro-language-server
     bash-language-server
     lua-language-server
-    # typescript-language-server
+    typescript-language-server
     vscode-langservers-extracted # css-lsp, html-lsp, json-lsp, eslint-lsp
     dockerfile-language-server
+    elixir-ls
     gopls
     pyright
     helm-ls
