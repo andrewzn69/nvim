@@ -95,6 +95,7 @@ return {
       jsonls = {},
       lua_ls = require('plugins.lsp.servers.lua_ls')(on_attach),
       marksman = {},
+      prismals = {},
       pyright = {}, -- require("plugins.lsp.servers.pyright")(on_attach),
       rust_analyzer = {},
       stylua = {},
