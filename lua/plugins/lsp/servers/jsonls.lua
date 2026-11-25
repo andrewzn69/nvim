@@ -9,6 +9,7 @@ return {
           'prettierrc.json',
         },
       }),
+      validate = { enable = true },
     },
   },
 }
