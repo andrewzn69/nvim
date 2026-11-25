@@ -7,7 +7,7 @@ return {
   config = function()
     local treesitter = require('nvim-treesitter')
 
-    treesitter.install({
+    local parsers = {
       'astro',
       'bash',
       'css',
@@ -29,6 +29,7 @@ return {
       'lua',
       'markdown',
       'markdown_inline',
+      'nix',
       'php',
       'prisma',
       'python',
@@ -45,6 +46,27 @@ return {
       'vue',
       'yaml',
       'yuck',
+    }
+
+    treesitter.install(parsers)
+
+    local parser_by_filetype = {}
+    for _, parser in ipairs(parsers) do
+      for _, filetype in ipairs(vim.treesitter.language.get_filetypes(parser)) do
+        parser_by_filetype[filetype] = parser
+      end
+    end
+
+    vim.api.nvim_create_autocmd('FileType', {
+      group = vim.api.nvim_create_augroup('treesitter_highlight', { clear = true }),
+      pattern = vim.tbl_keys(parser_by_filetype),
+      callback = function(ev)
+        local parser = parser_by_filetype[vim.bo[ev.buf].filetype]
+
+        if vim.treesitter.language.add(parser) then
+          vim.treesitter.start(ev.buf, parser)
+        end
+      end,
     })
 
     local r = require('utils.remaps')
