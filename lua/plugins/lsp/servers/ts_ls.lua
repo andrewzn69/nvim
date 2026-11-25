@@ -1,6 +1,6 @@
 local VUE_PACKAGE = '@vue/language-server'
 
--- covers packages that keep it inside a monorepo
+-- covers packages that keep vue pkg inside a monorepo
 local SEARCH_DEPTH = 4
 
 -- stops search early when binary is a wrapper script in a shared dir
@@ -38,7 +38,7 @@ local function find_install_dir()
   return vim.fs.dirname(bin_dir)
 end
 
--- npm installs have it at top, other installs nest it deeper
+-- npm installs put vue at the top, other installs nest it deeper
 local function find_vue_package_dir(install_dir)
   if is_vue_package(install_dir) then
     return install_dir
