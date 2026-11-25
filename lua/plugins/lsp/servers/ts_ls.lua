@@ -66,6 +66,13 @@ end
 local install_dir = find_install_dir()
 local vue_package_dir = install_dir and find_vue_package_dir(install_dir)
 
+if install_dir and not vue_package_dir then
+  vim.notify(
+    ('%s not found in %s, ts_ls runs without vue support'):format(VUE_PACKAGE, install_dir),
+    vim.log.levels.WARN
+  )
+end
+
 -- without vue package ts_ls runs on lspconfig defaults
 if not vue_package_dir then
   return {}
