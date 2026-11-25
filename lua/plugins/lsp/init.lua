@@ -92,7 +92,7 @@ return {
       hyprls = {},
       intelephense = require('plugins.lsp.servers.phpls')(on_attach),
       jinja_lsp = {},
-      jsonls = {},
+      jsonls = require('plugins.lsp.servers.jsonls'),
       lua_ls = require('plugins.lsp.servers.lua_ls')(on_attach),
       marksman = {},
       prismals = {},
