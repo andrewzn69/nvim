@@ -105,7 +105,7 @@ return {
       tinymist = require('plugins.lsp.servers.tinymist')(on_attach),
       yamlls = {},
       nixd = {},
-      ts_ls = require('plugins.lsp.servers.ts_ls')(on_attach),
+      ts_ls = {},
       helm_ls = {},
     }
 
