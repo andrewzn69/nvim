@@ -47,8 +47,6 @@ return {
       'yuck',
     })
 
-    vim.treesitter.language.register('gotmpl', { 'gohtmltmpl', 'gotexttmpl' })
-
     local r = require('utils.remaps')
     r.noremap('n', '<leader>dp', function()
       vim.treesitter.inspect_tree({ command = 'botright 60vnew' })
