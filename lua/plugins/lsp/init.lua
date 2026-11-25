@@ -104,9 +104,10 @@ return {
       texlab = require('plugins.lsp.servers.texlab')(on_attach),
       tflint = {},
       tinymist = require('plugins.lsp.servers.tinymist')(on_attach),
+      vue_ls = {},
       yamlls = {},
       nixd = {},
-      ts_ls = {},
+      ts_ls = require('plugins.lsp.servers.ts_ls'),
       helm_ls = {},
     }
 
