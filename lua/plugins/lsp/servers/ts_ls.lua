@@ -3,6 +3,9 @@ local VUE_PACKAGE = '@vue/language-server'
 -- covers packages that keep it inside a monorepo
 local SEARCH_DEPTH = 4
 
+-- stops search early when binary is a wrapper script in a shared dir
+local MAX_SEARCHED_ENTRIES = 1000
+
 local function read_package_name(dir)
   local file = io.open(vim.fs.joinpath(dir, 'package.json'))
   if not file then
@@ -41,11 +44,19 @@ local function find_vue_package_dir(install_dir)
     return install_dir
   end
 
+  local searched = 0
+
   for name, kind in vim.fs.dir(install_dir, { depth = SEARCH_DEPTH }) do
     local dir = vim.fs.joinpath(install_dir, name)
 
     if kind == 'directory' and is_vue_package(dir) then
       return dir
+    end
+
+    searched = searched + 1
+
+    if searched == MAX_SEARCHED_ENTRIES then
+      return nil
     end
   end
 
