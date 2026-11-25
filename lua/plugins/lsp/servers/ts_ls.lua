@@ -12,7 +12,7 @@ local function read_package_name(dir)
   local ok, manifest = pcall(vim.json.decode, file:read('*a'))
   file:close()
 
-  if not ok then
+  if not ok or type(manifest) ~= 'table' then
     return nil
   end
 
