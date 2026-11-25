@@ -20,7 +20,7 @@
 		{
 			"customType": "regex",
 			"description": "Update Nix installed in CI workflows",
-			"managerFilePatterns": ["/^\\.github/workflows/[^/]+\\.ya?ml$/"],
+			"managerFilePatterns": ["/^\\.github/workflows/[^/]+\\.ya?ml$/", "/^\\.github/actions/[^/]+/action\\.ya?ml$/"],
 			"matchStrings": ["NIX_VERSION: (?<currentValue>\\S+)"],
 			"depNameTemplate": "NixOS/nix",
 			"datasourceTemplate": "github-tags"
