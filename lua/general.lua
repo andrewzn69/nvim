@@ -84,10 +84,9 @@ vim.cmd([[let &t_Ce = "\e[4:0m"]])
 vim.api.nvim_create_autocmd('BufEnter', {
   pattern = '*',
   callback = function()
-    local cwd = vim.fn.getcwd()
-    local git_root = vim.fn.finddir('.git', cwd .. ';')
-    if git_root ~= '' then
-      vim.cmd('cd ' .. vim.fn.fnamemodify(git_root, ':h'))
+    local git_root = vim.fs.root(0, '.git')
+    if git_root and git_root ~= vim.fn.getcwd() then
+      vim.cmd.cd(git_root)
     end
   end,
 })
