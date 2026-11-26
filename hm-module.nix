@@ -28,7 +28,7 @@ in
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
-    withRuby = true;
+    withRuby = false;
     withPython3 = true;
     sideloadInitLua = true;
     extraPackages = [ pkgs.gcc ];

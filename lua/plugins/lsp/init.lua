@@ -14,15 +14,11 @@ return {
     local icons = require('utils.icons')
 
     local presentCmpNvimLsp, cmp_lsp = pcall(require, 'cmp_nvim_lsp')
-    local presentLspSignature, lsp_signature = pcall(require, 'lsp_signature')
 
     vim.lsp.log.set_level('error')
 
     local function on_attach(client, bufnr)
       remaps.set_default_on_buffer(client, bufnr)
-      if presentLspSignature then
-        lsp_signature.on_attach({ floating_window = false, timer_interval = 500 })
-      end
     end
 
     -- Configure diagnostics
@@ -96,7 +92,7 @@ return {
       lua_ls = require('plugins.lsp.servers.lua_ls')(on_attach),
       marksman = {},
       prismals = {},
-      pyright = {}, -- require("plugins.lsp.servers.pyright")(on_attach),
+      pyright = {},
       rust_analyzer = {},
       stylua = {},
       tailwindcss = {},
@@ -120,20 +116,10 @@ return {
       },
     }
 
-    -- Configure LSP servers using new vim.lsp.config API
     for server, config in pairs(servers) do
       local merged_config = vim.tbl_deep_extend('force', default_lsp_config, config or {})
 
-      if server == 'rust_analyzer' then
-        local present_rust_tools, rust_tools = pcall(require, 'rust-tools')
-        if present_rust_tools then
-          rust_tools.setup({ server = merged_config })
-        else
-          vim.lsp.config(server, merged_config)
-        end
-      else
-        vim.lsp.config(server, merged_config)
-      end
+      vim.lsp.config(server, merged_config)
     end
 
     -- Enable all configured LSP servers
