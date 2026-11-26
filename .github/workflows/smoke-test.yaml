@@ -39,9 +39,7 @@ jobs:
           echo "XDG_CONFIG_HOME=$config_home" >> "$GITHUB_ENV"
 
       - name: Restore plugins
-        env:
-          SMOKE_CHECK: restore
-        run: nvim --headless '+luafile tests/smoke.lua' '+autocmd VimEnter * cquit'
+        run: nvim --headless '+luafile tests/smoke/restore.lua' '+autocmd VimEnter * cquit'
 
       - name: Check plugin commits
         # each check still runs when an earlier one fails
@@ -50,24 +48,16 @@ jobs:
 
       - name: Check treesitter parsers
         if: ${{ !cancelled() && steps.config.outcome == 'success' }}
-        env:
-          SMOKE_CHECK: parsers
-        run: nvim --headless '+luafile tests/smoke.lua' '+autocmd VimEnter * cquit'
+        run: nvim --headless '+luafile tests/smoke/parsers.lua' '+autocmd VimEnter * cquit'
 
       - name: Check plugins
         if: ${{ !cancelled() && steps.config.outcome == 'success' }}
-        env:
-          SMOKE_CHECK: plugins
-        run: nvim --headless '+luafile tests/smoke.lua' '+autocmd VimEnter * cquit'
+        run: nvim --headless '+luafile tests/smoke/plugins.lua' '+autocmd VimEnter * cquit'
 
       - name: Check LSP servers
         if: ${{ !cancelled() && steps.config.outcome == 'success' }}
-        env:
-          SMOKE_CHECK: lsp
-        run: nvim --headless '+luafile tests/smoke.lua' '+autocmd VimEnter * cquit'
+        run: nvim --headless '+luafile tests/smoke/lsp.lua' '+autocmd VimEnter * cquit'
 
       - name: Check formatters
         if: ${{ !cancelled() && steps.config.outcome == 'success' }}
-        env:
-          SMOKE_CHECK: formatters
-        run: nvim --headless '+luafile tests/smoke.lua' '+autocmd VimEnter * cquit'
+        run: nvim --headless '+luafile tests/smoke/formatters.lua' '+autocmd VimEnter * cquit'
