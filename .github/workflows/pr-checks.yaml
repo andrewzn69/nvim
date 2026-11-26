@@ -25,3 +25,9 @@ jobs:
       fix: false
       lint-fail-on-findings: true
       format-fail-on-findings: true
+
+  smoke-test:
+    name: Smoke Test
+    permissions:
+      contents: read
+    uses: ./.github/workflows/smoke-test.yaml

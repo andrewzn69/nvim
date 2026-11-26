@@ -25,6 +25,17 @@
             pkgs.lua51Packages.luacheck
           ];
         };
+
+        smoke-test = pkgs.mkShellNoCC {
+          packages = [
+            pkgs.neovim
+            pkgs.git
+            # nvim-treeshitter downloads parsers with curl and builds them with C compiler and tree-shitter cli
+            pkgs.curl
+            pkgs.gcc
+            pkgs.tree-sitter
+          ];
+        };
       });
     };
 }

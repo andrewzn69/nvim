@@ -4,10 +4,8 @@ return {
     'nvim-treesitter/nvim-treesitter-textobjects',
   },
   build = ':TSUpdate',
-  config = function()
-    local treesitter = require('nvim-treesitter')
-
-    local parsers = {
+  opts = {
+    parsers = {
       'astro',
       'bash',
       'css',
@@ -46,12 +44,15 @@ return {
       'vue',
       'yaml',
       'yuck',
-    }
+    },
+  },
+  config = function(_, opts)
+    local treesitter = require('nvim-treesitter')
 
-    treesitter.install(parsers)
+    treesitter.install(opts.parsers)
 
     local parser_by_filetype = {}
-    for _, parser in ipairs(parsers) do
+    for _, parser in ipairs(opts.parsers) do
       for _, filetype in ipairs(vim.treesitter.language.get_filetypes(parser)) do
         parser_by_filetype[filetype] = parser
       end

@@ -1,0 +1,73 @@
+---
+# yaml-language-server: $schema=https://www.schemastore.org/github-workflow.json
+name: Smoke Test
+
+on:
+  workflow_dispatch:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke-test:
+    name: Start Neovim
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      # nix develop needs flakes
+      NIX_CONFIG: extra-experimental-features = nix-command flakes
+    defaults:
+      run:
+        shell: nix develop .#smoke-test --no-update-lock-file -c bash -e {0}
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Install Nix
+        uses: ./.github/actions/install-nix
+
+      - name: Use repo as Neovim config
+        id: config
+        shell: bash
+        run: |
+          config_home="$RUNNER_TEMP/config"
+          mkdir -p "$config_home"
+          ln -s "$GITHUB_WORKSPACE" "$config_home/nvim"
+          echo "XDG_CONFIG_HOME=$config_home" >> "$GITHUB_ENV"
+
+      - name: Restore plugins
+        env:
+          SMOKE_CHECK: restore
+        run: nvim --headless '+luafile tests/smoke.lua' '+autocmd VimEnter * cquit'
+
+      - name: Check plugin commits
+        # each check still runs when an earlier one fails
+        if: ${{ !cancelled() && steps.config.outcome == 'success' }}
+        run: git diff --exit-code -- lua/plugins/lazy-lock.json
+
+      - name: Check treesitter parsers
+        if: ${{ !cancelled() && steps.config.outcome == 'success' }}
+        env:
+          SMOKE_CHECK: parsers
+        run: nvim --headless '+luafile tests/smoke.lua' '+autocmd VimEnter * cquit'
+
+      - name: Check plugins
+        if: ${{ !cancelled() && steps.config.outcome == 'success' }}
+        env:
+          SMOKE_CHECK: plugins
+        run: nvim --headless '+luafile tests/smoke.lua' '+autocmd VimEnter * cquit'
+
+      - name: Check LSP servers
+        if: ${{ !cancelled() && steps.config.outcome == 'success' }}
+        env:
+          SMOKE_CHECK: lsp
+        run: nvim --headless '+luafile tests/smoke.lua' '+autocmd VimEnter * cquit'
+
+      - name: Check formatters
+        if: ${{ !cancelled() && steps.config.outcome == 'success' }}
+        env:
+          SMOKE_CHECK: formatters
+        run: nvim --headless '+luafile tests/smoke.lua' '+autocmd VimEnter * cquit'
