@@ -31,3 +31,9 @@ jobs:
     permissions:
       contents: read
     uses: ./.github/workflows/smoke-test.yaml
+
+  plugin-rules:
+    name: Plugin Rules
+    permissions:
+      contents: read
+    uses: ./.github/workflows/plugin-rules.yaml

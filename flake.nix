@@ -36,6 +36,12 @@
             pkgs.tree-sitter
           ];
         };
+
+        plugin-rules = pkgs.mkShellNoCC {
+          packages = [
+            pkgs.neovim-unwrapped
+          ];
+        };
       });
     };
 }
