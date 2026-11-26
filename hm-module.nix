@@ -25,6 +25,7 @@ in
 {
   programs.neovim = {
     enable = true;
+    package = flakePkgs.neovim-unwrapped;
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
