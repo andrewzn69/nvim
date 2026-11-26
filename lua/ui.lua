@@ -40,7 +40,7 @@ local noname = '[unnamed]'
 local function extract_filename(win)
   local b = vim.api.nvim_win_get_buf(win)
   local fullname = vim.api.nvim_buf_get_name(b)
-  local mod = vim.api.nvim_buf_get_option(b, 'modified') and '◈ ' or ''
+  local mod = vim.bo[b].modified and '◈ ' or ''
   if fullname ~= '' then
     local shortname = vim.fn.fnamemodify(fullname, ':~:.:gs%(.?[^/])[^/]*/%\1/%')
     if #shortname > 30 then
