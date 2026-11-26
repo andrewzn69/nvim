@@ -7,7 +7,7 @@ vim.opt.title = true
 
 vim.opt.showcmd = true
 vim.opt.laststatus = 2
-vim.opt.scrolloff = 10
+vim.opt.scrolloff = 13
 
 -- cursorline
 vim.opt.cursorline = true
@@ -24,9 +24,6 @@ vim.opt.hidden = true
 vim.opt.swapfile = false
 vim.opt.undofile = true
 vim.opt.undodir = vim.fn.stdpath('data') .. '/undo'
-
--- scroll bounds
-vim.o.scrolloff = 13
 
 -- use markdown syntax highlighting for mdx
 -- no mdx treeshitter support yet?
