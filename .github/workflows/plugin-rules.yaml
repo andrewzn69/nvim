@@ -1,0 +1,31 @@
+---
+# yaml-language-server: $schema=https://www.schemastore.org/github-workflow.json
+name: Plugin Rules
+
+on:
+  workflow_dispatch:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  plugin-rules:
+    name: Compare plugins and rules
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      # nix develop needs flakes
+      NIX_CONFIG: extra-experimental-features = nix-command flakes
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Install Nix
+        uses: ./.github/actions/install-nix
+
+      - name: Check plugin rules
+        shell: nix develop .#plugin-rules --no-update-lock-file -c bash -e {0}
+        run: nvim -l tests/plugin-rules.lua
