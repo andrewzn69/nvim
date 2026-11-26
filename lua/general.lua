@@ -101,20 +101,20 @@ vim.api.nvim_create_autocmd('BufEnter', {
 vim.api.nvim_create_autocmd('VimEnter', {
   callback = function()
     vim.opt.path:append('**')
-    vim.opt.wildignore:append(
-      '.git,.hg,.svn'
-        .. '.aux,*.out,*.toc'
-        .. '.o,*.obj,*.exe,*.dll,*.manifest,*.rbc,*.class'
-        .. '.ai,*.bmp,*.gif,*.ico,*.jpg,*.jpeg,*.png,*.psd,*.webp'
-        .. '.avi,*.divx,*.mp4,*.webm,*.mov,*.m2ts,*.mkv,*.vob,*.mpg,*.mpeg'
-        .. '.mp3,*.oga,*.ogg,*.wav,*.flac'
-        .. '.eot,*.otf,*.ttf,*.woff'
-        .. '.doc,*.pdf,*.cbr,*.cbz'
-        .. '.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz,*.kgb'
-        .. '.swp,.lock,.DS_Store,._*'
-        .. '.,..'
-        .. ' */node_modules/* '
-    )
+    vim.opt.wildignore:append(table.concat({
+      '.git,.hg,.svn',
+      '*.aux,*.out,*.toc',
+      '*.o,*.obj,*.exe,*.dll,*.manifest,*.rbc,*.class',
+      '*.ai,*.bmp,*.gif,*.ico,*.jpg,*.jpeg,*.png,*.psd,*.webp',
+      '*.avi,*.divx,*.mp4,*.webm,*.mov,*.m2ts,*.mkv,*.vob,*.mpg,*.mpeg',
+      '*.mp3,*.oga,*.ogg,*.wav,*.flac',
+      '*.eot,*.otf,*.ttf,*.woff',
+      '*.doc,*.pdf,*.cbr,*.cbz',
+      '*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz,*.kgb',
+      '*.swp,.lock,.DS_Store,._*',
+      '.,..',
+      '*/node_modules/*',
+    }, ','))
   end,
 })
 
