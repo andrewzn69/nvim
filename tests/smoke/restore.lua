@@ -14,7 +14,7 @@ local function restore()
 
   -- config builds parsers in background, so restore waits for them before nvim quits
   errors = helpers.errors_from(function()
-    local parsers = require('plugins.treeshitter').opts.parsers
+    local parsers = require('plugins.language.treeshitter').opts.parsers
     require('nvim-treesitter').install(parsers):wait(PARSER_BUILD_TIMEOUT_MS)
   end)
   if errors then

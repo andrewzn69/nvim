@@ -7,7 +7,7 @@ chmod u+w "$lockdir/lazy-lock.json"
 
 # treeshitter config builds parsers in background, so nvim waits for them before it quits
 parser_build_timeout_ms=$((10 * 60 * 1000))
-wait_for_parsers="lua require('nvim-treesitter').install(require('plugins.treeshitter').opts.parsers):wait($parser_build_timeout_ms)"
+wait_for_parsers="lua require('nvim-treesitter').install(require('plugins.language.treeshitter').opts.parsers):wait($parser_build_timeout_ms)"
 
 # plugin build steps call tools from user and system profiles
 PATH="$PATH:$PROFILE_BIN:/run/current-system/sw/bin" \

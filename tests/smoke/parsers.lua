@@ -14,7 +14,7 @@ local function check_parser(parser)
     return
   end
 
-  -- lua/plugins/treeshitter.lua starts highlighting on each of these filetypes
+  -- lua/plugins/language/treeshitter.lua starts highlighting on each of these filetypes
   for _, filetype in ipairs(vim.treesitter.language.get_filetypes(parser)) do
     local errors = helpers.errors_from(function()
       helpers.set_filetype_on_new_buffer(filetype)
@@ -26,7 +26,7 @@ local function check_parser(parser)
 end
 
 local function check_parsers()
-  local parsers = require('plugins.treeshitter').opts.parsers
+  local parsers = require('plugins.language.treeshitter').opts.parsers
 
   local missing = missing_parsers(parsers)
   if #missing > 0 then
