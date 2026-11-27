@@ -1,6 +1,6 @@
 ---
 # yaml-language-server: $schema=https://www.schemastore.org/github-workflow.json
-name: PR Checks
+name: CI
 
 on:
   pull_request:
