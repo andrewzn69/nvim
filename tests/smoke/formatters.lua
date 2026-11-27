@@ -23,7 +23,7 @@ local function check_formatters()
     return
   end
 
-  local formatters_by_ft = require('plugins.format').opts.formatters_by_ft
+  local formatters_by_ft = require('plugins.language.format').opts.formatters_by_ft
   for _, filetype in ipairs(helpers.sorted_keys(formatters_by_ft)) do
     local buf = vim.api.nvim_get_current_buf()
     if not vim.list_contains(NON_FILETYPE_FORMATTER_KEYS, filetype) then

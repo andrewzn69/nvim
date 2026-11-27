@@ -10,7 +10,7 @@ return {
     require('lsp_lines').setup()
     require('spellwarn').setup({})
 
-    local remaps = require('plugins.lsp.remaps')
+    local remaps = require('plugins.language.lsp.remaps')
     local icons = require('utils.icons')
 
     local presentCmpNvimLsp, cmp_lsp = pcall(require, 'cmp_nvim_lsp')
@@ -77,33 +77,33 @@ return {
 
     local servers = {
       astro = {},
-      bashls = require('plugins.lsp.servers.bashls')(on_attach),
-      biome = require('plugins.lsp.servers.biome')(on_attach),
+      bashls = require('plugins.language.lsp.servers.bashls')(on_attach),
+      biome = require('plugins.language.lsp.servers.biome')(on_attach),
       clangd = {},
-      cssls = require('plugins.lsp.servers.cssls')(on_attach),
+      cssls = require('plugins.language.lsp.servers.cssls')(on_attach),
       dockerls = {},
       elixirls = {},
       gopls = {},
       html = {},
       hyprls = {},
-      intelephense = require('plugins.lsp.servers.phpls')(on_attach),
+      intelephense = require('plugins.language.lsp.servers.phpls')(on_attach),
       jinja_lsp = {},
-      jsonls = require('plugins.lsp.servers.jsonls'),
-      lua_ls = require('plugins.lsp.servers.lua_ls')(on_attach),
+      jsonls = require('plugins.language.lsp.servers.jsonls'),
+      lua_ls = require('plugins.language.lsp.servers.lua_ls')(on_attach),
       marksman = {},
       prismals = {},
       pyright = {},
       rust_analyzer = {},
       stylua = {},
       tailwindcss = {},
-      terraformls = require('plugins.lsp.servers.terraformls')(on_attach),
-      texlab = require('plugins.lsp.servers.texlab')(on_attach),
+      terraformls = require('plugins.language.lsp.servers.terraformls')(on_attach),
+      texlab = require('plugins.language.lsp.servers.texlab')(on_attach),
       tflint = {},
-      tinymist = require('plugins.lsp.servers.tinymist')(on_attach),
+      tinymist = require('plugins.language.lsp.servers.tinymist')(on_attach),
       vue_ls = {},
       yamlls = {},
       nixd = {},
-      ts_ls = require('plugins.lsp.servers.ts_ls'),
+      ts_ls = require('plugins.language.lsp.servers.ts_ls'),
       helm_ls = {},
     }
 
