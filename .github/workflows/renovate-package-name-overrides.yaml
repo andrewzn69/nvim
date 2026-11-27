@@ -1,6 +1,6 @@
 ---
 # yaml-language-server: $schema=https://www.schemastore.org/github-workflow.json
-name: Plugin Rules
+name: Renovate Package Name Overrides
 
 on:
   workflow_dispatch:
@@ -10,8 +10,8 @@ permissions:
   contents: read
 
 jobs:
-  plugin-rules:
-    name: Compare plugins and rules
+  renovate-package-name-overrides:
+    name: Compare lazy-lock.json and package name overrides
     runs-on: ubuntu-latest
     timeout-minutes: 10
     env:
@@ -26,6 +26,6 @@ jobs:
       - name: Install Nix
         uses: ./.github/actions/install-nix
 
-      - name: Check plugin rules
-        shell: nix develop .#plugin-rules --no-update-lock-file -c bash -e {0}
-        run: nvim -l tests/plugin-rules.lua
+      - name: Check package name overrides
+        shell: nix develop .#renovate-package-name-overrides --no-update-lock-file -c bash -e {0}
+        run: nvim -l tests/renovate-package-name-overrides.lua

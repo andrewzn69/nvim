@@ -47,6 +47,10 @@ on:
         description: Fail on formatting differences in check mode
         type: boolean
         default: true
+    outputs:
+      patch:
+        description: Whether StyLua fixes were uploaded as a patch
+        value: ${{ jobs.validate.outputs.patch }}
 
 permissions:
   contents: read
@@ -56,6 +60,8 @@ jobs:
     name: Lint and format
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    outputs:
+      patch: ${{ steps.format.outputs.patch }}
     env:
       # nix develop needs flakes
       NIX_CONFIG: extra-experimental-features = nix-command flakes

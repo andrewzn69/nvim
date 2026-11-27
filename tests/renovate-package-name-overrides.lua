@@ -18,8 +18,8 @@ local function locked_plugins()
   return vim.tbl_keys(vim.json.decode(read_file(LOCKFILE)))
 end
 
--- only rules that give a plugin its repo set overridePackageName
-local function ruled_plugins()
+-- other package rules also match deps by name, so only overrides count
+local function overridden_plugins()
   local config = vim.json.decode(read_file(RENOVATE_CONFIG), { skip_comments = true })
   local plugins = {}
   for _, rule in ipairs(config.packageRules) do
@@ -45,14 +45,14 @@ local function print_missing(plugins, file)
 end
 
 local locked = locked_plugins()
-local ruled = ruled_plugins()
-local without_rule = missing_from(locked, ruled)
-local without_plugin = missing_from(ruled, locked)
+local overridden = overridden_plugins()
+local without_override = missing_from(locked, overridden)
+local without_plugin = missing_from(overridden, locked)
 
-print_missing(without_rule, RENOVATE_CONFIG)
+print_missing(without_override, RENOVATE_CONFIG)
 print_missing(without_plugin, LOCKFILE)
 
-if #without_rule > 0 or #without_plugin > 0 then
+if #without_override > 0 or #without_plugin > 0 then
   vim.cmd.cquit()
 end
 write(('%s and %s list same plugins'):format(LOCKFILE, RENOVATE_CONFIG))

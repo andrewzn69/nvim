@@ -35,8 +35,8 @@ jobs:
       contents: read
     uses: ./.github/workflows/smoke-test.yaml
 
-  plugin-rules:
-    name: Plugin Rules
+  renovate-package-name-overrides:
+    name: Renovate Package Name Overrides
     permissions:
       contents: read
-    uses: ./.github/workflows/plugin-rules.yaml
+    uses: ./.github/workflows/renovate-package-name-overrides.yaml

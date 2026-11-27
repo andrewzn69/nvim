@@ -37,7 +37,7 @@
           ];
         };
 
-        plugin-rules = pkgs.mkShellNoCC {
+        renovate-package-name-overrides = pkgs.mkShellNoCC {
           packages = [
             pkgs.neovim-unwrapped
           ];
