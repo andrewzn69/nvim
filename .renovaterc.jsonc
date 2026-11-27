@@ -75,7 +75,6 @@
 		{ "matchDepNames": ["lsp_lines.nvim"], "overrideDatasource": "git-refs", "overridePackageName": "https://git.sr.ht/~whynothugo/lsp_lines.nvim" },
 		{ "matchDepNames": ["lspkind-nvim"], "overridePackageName": "onsails/lspkind-nvim" },
 		{ "matchDepNames": ["lualine.nvim"], "overridePackageName": "nvim-lualine/lualine.nvim" },
-		{ "matchDepNames": ["markdown-preview.nvim"], "overridePackageName": "iamcco/markdown-preview.nvim" },
 		{ "matchDepNames": ["mini.indentscope"], "overridePackageName": "echasnovski/mini.indentscope" },
 		{ "matchDepNames": ["neo-tree.nvim"], "overridePackageName": "nvim-neo-tree/neo-tree.nvim" },
 		{ "matchDepNames": ["nui.nvim"], "overridePackageName": "MunifTanjim/nui.nvim" },
