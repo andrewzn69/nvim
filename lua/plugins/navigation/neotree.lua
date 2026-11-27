@@ -1,5 +1,6 @@
 return {
   'nvim-neo-tree/neo-tree.nvim',
+  desc = 'file tree',
   cmd = 'Neotree',
   dependencies = { 'MunifTanjim/nui.nvim', lazy = true },
   opts = function(_, opts)

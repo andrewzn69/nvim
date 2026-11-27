@@ -3,6 +3,7 @@ local theme = 'gruvbox'
 if theme == 'everforest' then
   return {
     'sainnhe/everforest',
+    desc = 'colorscheme',
     lazy = false,
     priority = 1000,
     config = function()
@@ -18,6 +19,7 @@ if theme == 'everforest' then
 elseif theme == 'gruvbox' then
   return {
     'ellisonleao/gruvbox.nvim',
+    desc = 'colorscheme',
     lazy = false,
     priority = 1000,
     config = function()
@@ -83,6 +85,7 @@ elseif theme == 'gruvbox' then
 elseif theme == 'oxocarbon' then
   return {
     'nyoom-engineering/oxocarbon.nvim',
+    desc = 'colorscheme',
     lazy = false,
     config = function()
       vim.cmd('colorscheme oxocarbon')
@@ -91,6 +94,7 @@ elseif theme == 'oxocarbon' then
 elseif theme == 'nord' then
   return {
     'shaunsingh/nord.nvim',
+    desc = 'colorscheme',
     lazy = false,
     config = function()
       vim.cmd('colorscheme nord')

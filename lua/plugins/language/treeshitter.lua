@@ -1,5 +1,6 @@
 return {
   'nvim-treesitter/nvim-treesitter',
+  desc = 'Tree-sitter parsers and queries',
   dependencies = {
     'nvim-treesitter/nvim-treesitter-textobjects',
   },

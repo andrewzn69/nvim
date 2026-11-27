@@ -1,5 +1,6 @@
 return {
   'lewis6991/gitsigns.nvim',
+  desc = 'signs for Git changes and hunk actions',
   config = function()
     local gitsigns = require('gitsigns')
     gitsigns.setup({

@@ -1,5 +1,6 @@
 return {
   'neovim/nvim-lspconfig',
+  desc = 'language server configs',
   dependencies = {
     'b0o/schemastore.nvim',
     'ravibrock/spellwarn.nvim',

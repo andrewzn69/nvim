@@ -1,5 +1,6 @@
 return {
   'tpope/vim-dadbod',
+  desc = 'database client with UI and completion',
   dependencies = {
     'kristijanhusak/vim-dadbod-ui',
     'kristijanhusak/vim-dadbod-completion',

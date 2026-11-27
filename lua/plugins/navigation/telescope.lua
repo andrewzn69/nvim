@@ -1,5 +1,6 @@
 return {
   'nvim-telescope/telescope.nvim',
+  desc = 'fuzzy finder for files, text and undo history',
   cmd = 'Telescope',
   event = 'VeryLazy',
   dependencies = {

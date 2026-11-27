@@ -1,5 +1,6 @@
 return {
   'folke/trouble.nvim',
+  desc = 'list of diagnostics and symbols',
   cmd = 'Trouble',
   event = 'VeryLazy',
   dependencies = { 'nvim-tree/nvim-web-devicons' },

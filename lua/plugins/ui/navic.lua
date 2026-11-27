@@ -1,5 +1,6 @@
 return {
   'SmiteshP/nvim-navic',
+  desc = 'LSP code context in winbar',
   event = 'LspAttach',
   dependencies = {
     'neovim/nvim-lspconfig',

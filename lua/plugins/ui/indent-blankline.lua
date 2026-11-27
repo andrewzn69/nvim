@@ -1,5 +1,6 @@
 return {
   'lukas-reineke/indent-blankline.nvim',
+  desc = 'indent guides',
   event = 'VeryLazy',
   config = function()
     require('ibl').setup({

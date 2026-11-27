@@ -1,5 +1,6 @@
 return {
   'goolord/alpha-nvim',
+  desc = 'start screen',
   lazy = true,
   event = 'VimEnter',
   priority = 1000,

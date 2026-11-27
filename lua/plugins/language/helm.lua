@@ -1,5 +1,6 @@
 return {
   'towolf/vim-helm',
+  desc = 'syntax for Helm templates',
   lazy = false,
   priority = 1000,
   config = function()

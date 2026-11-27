@@ -1,5 +1,6 @@
 return {
   'nvim-lualine/lualine.nvim',
+  desc = 'statusline and winbar',
   event = 'VeryLazy',
   lazy = true,
   priority = 500,

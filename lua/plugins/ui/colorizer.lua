@@ -1,5 +1,6 @@
 return {
   'brenoprata10/nvim-highlight-colors',
+  desc = 'shows color codes in their color',
   event = 'VeryLazy',
   config = function()
     local r = require('utils.remaps')

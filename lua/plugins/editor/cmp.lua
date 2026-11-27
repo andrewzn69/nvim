@@ -1,5 +1,6 @@
 return {
   'hrsh7th/nvim-cmp',
+  desc = 'completion from LSP, buffers, paths and snippets',
   event = { 'InsertEnter', 'CmdlineEnter' },
   priority = 100,
   dependencies = {

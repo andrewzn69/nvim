@@ -1,5 +1,6 @@
 return {
   'folke/which-key.nvim',
+  desc = 'popup with available keymaps',
   keys = { '<leader>' },
   config = function()
     require('which-key').setup({

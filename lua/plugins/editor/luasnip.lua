@@ -1,5 +1,6 @@
 return {
   'L3MON4D3/LuaSnip',
+  desc = 'snippet engine with friendly-snippets',
   dependencies = { 'rafamadriz/friendly-snippets' },
   event = 'InsertEnter',
   config = function()

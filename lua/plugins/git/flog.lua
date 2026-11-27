@@ -1,5 +1,6 @@
 return {
   'rbong/vim-flog',
+  desc = 'Git branch viewer',
   event = 'VeryLazy',
   dependencies = {
     'tpope/vim-fugitive',

@@ -2,6 +2,7 @@ local lsp = { lsp_format = 'prefer' }
 
 return {
   'stevearc/conform.nvim',
+  desc = 'runs formatters on save',
   event = { 'BufRead', 'BufNewFile' },
   opts = {
     formatters_by_ft = {

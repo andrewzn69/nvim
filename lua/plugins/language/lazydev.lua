@@ -1,5 +1,6 @@
 return {
   'folke/lazydev.nvim',
+  desc = 'configures LuaLS for Neovim config',
   ft = 'lua',
   opts = {
     library = {
