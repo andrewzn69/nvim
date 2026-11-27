@@ -44,7 +44,6 @@ lazy.setup({
     require('plugins.lsp'),
     require('plugins.lualine'),
     require('plugins.luasnip'),
-    require('plugins.markdown'),
     require('plugins.navic'),
     require('plugins.neotree'),
     require('plugins.scrollbar'),
