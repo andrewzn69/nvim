@@ -1,0 +1,53 @@
+---
+# yaml-language-server: $schema=https://www.schemastore.org/github-workflow.json
+name: autofix.ci
+
+on:
+  pull_request:
+    branches:
+      - master
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  autofix:
+    name: Update lazy-lock.json and .renovaterc.jsonc
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    env:
+      NIX_CONFIG: extra-experimental-features = nix-command flakes
+    defaults:
+      run:
+        shell: nix develop .#smoke-test --no-update-lock-file -c bash -e {0}
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Install Nix
+        uses: ./.github/actions/install-nix
+
+      - name: Use repo as Neovim config
+        shell: bash
+        run: |
+          config_home="$RUNNER_TEMP/config"
+          mkdir -p "$config_home"
+          ln -s "$GITHUB_WORKSPACE" "$config_home/nvim"
+          echo "XDG_CONFIG_HOME=$config_home" >> "$GITHUB_ENV"
+
+      # lazy updates lazy-lock.json with new plugins and removes entries for removed ones
+      - name: Update lazy-lock.json
+        run: nvim --headless '+Lazy! install' +qa
+
+      - name: Update Renovate package name overrides from lazy-lock.json
+        run: nvim -l scripts/update-renovate-package-name-overrides.lua
+
+      - name: Commit changes to PR
+        uses: autofix-ci/action@c5b2d67aa2274e7b5a18224e8171550871fc7e4a # v1.3.4
